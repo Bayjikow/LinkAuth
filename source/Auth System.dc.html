@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#F4F4F0;font-family:-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:#1976FF;text-decoration:none;font-weight:600;}
+a:hover{color:#1865E0;}
+*::-webkit-scrollbar{width:0;height:0;}
+*{scrollbar-width:none;}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}
+@keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.08);opacity:1}80%{transform:scale(.96)}100%{transform:scale(1);opacity:1}}
+@keyframes ringOut{0%{transform:scale(1);opacity:.45}100%{transform:scale(1.8);opacity:0}}
+@keyframes drawCheck{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+@keyframes kbUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes sheetUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scanPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes faceScanRing{0%{transform:scale(1);opacity:.55}80%,100%{transform:scale(1.7);opacity:0}}
+@keyframes faceScanGlow{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes keyForge{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+@keyframes keyForgeShine{0%{transform:translateX(-100%);opacity:0}50%{opacity:1}100%{transform:translateX(100%);opacity:0}}
+@keyframes dataStream{0%{transform:translate(-50%,-110%) scale(.6);opacity:0}10%{opacity:.9}50%{transform:translate(-50%,60%) scale(1);opacity:.9}90%,100%{transform:translate(-50%,180%) scale(.7);opacity:0}}
+@keyframes downloadArrow{0%,100%{transform:translateY(-4px);opacity:.7}50%{transform:translateY(4px);opacity:1}}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#F4F4F0">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#F4F4F0"></rect><g transform="translate(505,140)"><rect x="0" y="0" width="190" height="380" rx="40" fill="#fff" stroke="#D9D9DE" stroke-width="3"></rect><rect x="72" y="18" width="46" height="14" rx="7" fill="#0A0A0A"></rect><rect x="55" y="66" width="80" height="80" rx="20" fill="#1976FF"></rect><rect x="40" y="172" width="110" height="12" rx="6" fill="#DCDCE2"></rect><rect x="26" y="206" width="138" height="46" rx="14" fill="#F2F2F7"></rect><rect x="26" y="286" width="138" height="44" rx="22" fill="#1976FF"></rect></g><text x="600" y="620" text-anchor="middle" font-family="system-ui, sans-serif" font-size="54" font-weight="800" fill="#0A0A0A">Link — Экраны входа</text></svg>
+</template>
+</helmet>
+
+<section data-screen-label="Auth · iOS" style="min-height:100vh;padding:44px 40px 64px;display:flex;flex-direction:column;align-items:center;gap:26px;">
+
+  <div style="max-width:700px;text-align:center;">
+    <div style="font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#1976FF;margin-bottom:10px;">Link · авторизация</div>
+    <h1 style="margin:0 0 12px;font-size:34px;line-height:1.06;font-weight:800;letter-spacing:-.03em;color:#0A0A0A;">Экраны входа</h1>
+    <p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:#6B6B70;text-wrap:pretty;">Все состояния флоу — рядом друг с другом, в языке из архива. Переключись на «Один экран», чтобы пройти сценарий кликами: клавиатура, выбор страны, код из SMS, Google, passkey, профиль.</p>
+    <div style="display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border-radius:12px;background:rgba(255,159,10,.1);">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C97A00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.4v.1"></path></svg>
+      <span style="font-size:13.5px;font-weight:500;color:#8A5A00;">Ниже — только iOS-ветка. Зеркало Android M3 из архива ещё не перенесено.</span>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;padding:5px;border-radius:16px;background:rgba(15,39,80,.06);">
+    <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+      <div onClick="{{ m.onPick }}" style="padding:9px 18px;border-radius:12px;background:{{ m.bg }};box-shadow:{{ m.shadow }};cursor:pointer;transition:background .18s;">
+        <span style="font-size:14.5px;font-weight:{{ m.weight }};color:{{ m.color }};">{{ m.label }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap;max-width:1720px;">
+
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="1">
+      <div style="width:{{ sec.width }};margin-bottom:18px;">
+        <sc-if value="{{ sec.hasHeader }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:baseline;gap:12px;margin:0 0 20px;padding:0 4px 10px;border-bottom:1px solid rgba(15,39,80,.1);">
+            <span style="font-size:20px;font-weight:800;letter-spacing:-.02em;color:#0A0A0A;">{{ sec.title }}</span>
+            <span style="flex:1;font-size:13.5px;color:#8E8E93;">{{ sec.sub }}</span>
+            <span style="font-size:12.5px;font-weight:700;color:#1976FF;">{{ sec.count }}</span>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start;">
+    <sc-for list="{{ sec.frames }}" as="f" hint-placeholder-count="1">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:11px;">
+        <div style="width:390px;height:800px;border-radius:48px;overflow:hidden;position:relative;background:#fff;box-shadow:0 40px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.12);display:flex;flex-direction:column;">
+
+          <div style="position:absolute;top:11px;left:50%;transform:translateX(-50%);width:126px;height:37px;border-radius:24px;background:#000;z-index:50;"></div>
+          <div style="position:absolute;top:0;left:0;right:0;height:340px;background:radial-gradient(circle at 50% 8%,rgba(30,125,255,.10) 0%,transparent 62%);pointer-events:none;z-index:0;"></div>
+
+          <div style="flex:none;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 27px;position:relative;z-index:20;">
+            <span style="font-size:17px;font-weight:600;color:#000;letter-spacing:-.2px;">9:41</span>
+            <div style="display:flex;align-items:center;gap:7px;">
+              <svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="7.5" width="3.2" height="4.5" rx="0.7" fill="#000"></rect><rect x="4.8" y="5" width="3.2" height="7" rx="0.7" fill="#000"></rect><rect x="9.6" y="2.5" width="3.2" height="9.5" rx="0.7" fill="#000"></rect><rect x="14.4" y="0" width="3.2" height="12" rx="0.7" fill="#000"></rect></svg>
+              <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 3.2C10.8 3.2 12.9 4.1 14.4 5.6L15.5 4.5C13.7 2.7 11.2 1.5 8.5 1.5C5.8 1.5 3.3 2.7 1.5 4.5L2.6 5.6C4.1 4.1 6.2 3.2 8.5 3.2Z" fill="#000"></path><path d="M8.5 6.8C9.9 6.8 11.1 7.3 12 8.2L13.1 7.1C11.8 5.9 10.2 5.1 8.5 5.1C6.8 5.1 5.2 5.9 3.9 7.1L5 8.2C5.9 7.3 7.1 6.8 8.5 6.8Z" fill="#000"></path><circle cx="8.5" cy="10.5" r="1.5" fill="#000"></circle></svg>
+              <svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.5" stroke="#000" stroke-opacity="0.35" fill="none"></rect><rect x="2" y="2" width="20" height="9" rx="2" fill="#000"></rect><path d="M25 4.5V8.5C25.8 8.2 26.5 7.2 26.5 6.5C26.5 5.8 25.8 4.8 25 4.5Z" fill="#000" fill-opacity="0.4"></path></svg>
+            </div>
+          </div>
+
+          <sc-if value="{{ f.isPhone }}" hint-placeholder-val="{{ true }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 20px 0;position:relative;z-index:2;">
+              <div style="flex:none;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:12px;">
+                <img src="assets/link-logo.png" width="44" height="44" alt="Link" style="border-radius:11px;display:block;margin-bottom:8px;">
+                <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;letter-spacing:-.6px;color:#0A0A0A;">Ваш номер</h2>
+                <p style="margin:0;font-size:15px;line-height:1.45;color:#0A0A0A;max-width:300px;">Введите номер телефона<br>или <span onClick="{{ f.onPasskey }}" style="color:#1976FF;cursor:pointer;">войдите по passkey&nbsp;›</span></p>
+              </div>
+
+              <div style="flex:none;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 12px 30px rgba(15,39,80,.08);padding:4px 18px;">
+                <div onClick="{{ f.onOpenCountry }}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:0.5px solid rgba(15,39,80,.08);cursor:pointer;">
+                  <span style="font-size:17px;color:#0A0A0A;">Страна</span>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:21px;line-height:1;">{{ f.countryFlag }}</span>
+                    <span style="font-size:17px;color:#0A0A0A;">{{ f.countryName }}</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#A6ACBA" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </div>
+                </div>
+                <div onClick="{{ f.onFocusPhone }}" style="display:flex;align-items:center;gap:16px;padding:14px 0;cursor:text;">
+                  <span style="font-size:17px;color:#0A0A0A;font-variant-numeric:tabular-nums;">{{ f.countryDial }}</span>
+                  <span style="flex:1;font-size:17px;color:{{ f.phoneColor }};letter-spacing:.2px;font-variant-numeric:tabular-nums;">{{ f.phoneText }}</span>
+                  <span style="display:inline-block;width:2px;height:20px;background:#1976FF;animation:blink 1s steps(2) infinite;"></span>
+                </div>
+              </div>
+
+              <p style="flex:none;margin:12px 6px 12px;font-size:12.5px;line-height:1.4;color:#8E8E93;">{{ f.phoneHint }}</p>
+
+              <div style="flex:1;min-height:18px;"></div>
+
+              <div onClick="{{ f.onSubmitPhone }}" style="flex:none;height:50px;border-radius:25px;background:{{ f.phoneCtaBg }};box-shadow:{{ f.phoneCtaShadow }};display:flex;align-items:center;justify-content:center;gap:10px;cursor:{{ f.phoneCtaCursor }};margin-bottom:{{ f.phoneCtaGap }};transition:background .2s;">
+                <sc-if value="{{ f.sendingSms }}" hint-placeholder-val="{{ false }}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" style="animation:spin .9s linear infinite;"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-opacity="0.3" stroke-width="2.4"></circle><path d="M21 12a9 9 0 00-9-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"></path></svg>
+                </sc-if>
+                <span style="font-size:16px;font-weight:600;letter-spacing:-.1px;color:{{ f.phoneCtaColor }};">{{ f.phoneCtaLabel }}</span>
+                <sc-if value="{{ f.phoneCtaHasIcon }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;">{{ f.phoneCtaIcon }}</div>
+                </sc-if>
+              </div>
+
+              <sc-if value="{{ f.notTyping }}" hint-placeholder-val="{{ true }}">
+                <p style="flex:none;margin:0 6px 24px;font-size:12px;line-height:1.5;color:#8E8E93;text-align:center;">Продолжая, вы соглашаетесь с <span style="color:#1976FF;">Условиями</span> и <span style="color:#1976FF;">Политикой конфиденциальности</span>.</p>
+              </sc-if>
+            </div>
+          </sc-if>
+
+
+          <sc-if value="{{ f.showSpeedupSheet }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:58;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,.32);">
+              <div onClick="{{ f.onSkipSpeedup }}" style="flex:1;cursor:pointer;"></div>
+              <div style="flex:none;background:#F7F7FA;border-radius:26px 26px 0 0;padding:9px 18px 30px;box-shadow:0 -18px 44px rgba(0,0,0,.2);animation:sheetUp .32s cubic-bezier(.2,.9,.3,1) both;">
+                <div style="width:36px;height:5px;border-radius:3px;background:#D4D4DA;margin:0 auto 16px;"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+                  <div style="width:72px;height:72px;border-radius:22px;background:#fff;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 10px 24px rgba(15,39,80,.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+                    <svg width="44" height="44" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="5"></rect><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path><circle cx="44" cy="54" r="4.5" fill="#1976FF"></circle><path d="M44 58.5v7" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path></svg>
+                  </div>
+                  <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">В следующий раз — без SMS</h2>
+                  <p style="margin:0 0 16px;font-size:14px;line-height:1.45;color:#6B6B70;max-width:290px;">Включите passkey: вход по Face ID за одно касание, код запрашивать не будем.</p>
+                </div>
+                <div onClick="{{ f.onEnablePasskey }}" style="height:50px;border-radius:25px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;">
+                  <span style="font-size:16px;font-weight:600;color:#fff;letter-spacing:-.1px;">Включить passkey</span>
+                </div>
+                <div onClick="{{ f.onSkipSpeedup }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                  <span style="font-size:15px;font-weight:500;color:#1976FF;">Пропустить</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showAvatarSheet }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:59;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,.32);">
+              <div onClick="{{ f.onCloseAvatars }}" style="flex:none;height:92px;cursor:pointer;"></div>
+              <div style="flex:1;min-height:0;background:#F7F7FA;border-radius:26px 26px 0 0;padding:9px 0 26px;box-shadow:0 -18px 44px rgba(0,0,0,.2);display:flex;flex-direction:column;animation:sheetUp .32s cubic-bezier(.2,.9,.3,1) both;">
+                <div style="flex:none;width:36px;height:5px;border-radius:3px;background:#D4D4DA;margin:0 auto 12px;"></div>
+                <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px 12px;">
+                  <span style="font-size:24px;font-weight:800;letter-spacing:-.7px;color:#0A0A0A;">Выберите аватар</span>
+                  <div onClick="{{ f.onCloseAvatars }}" style="width:38px;height:38px;border-radius:19px;background:rgba(118,118,128,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+                  </div>
+                </div>
+                <div style="flex:none;display:flex;gap:8px;padding:0 20px 14px;">
+                  <sc-for list="{{ f.avatarSources }}" as="s" hint-placeholder-count="3">
+                    <div style="flex:1;height:70px;border-radius:18px;background:#fff;box-shadow:0 0 0 1px rgba(15,39,80,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;">
+                      <div style="display:flex;">{{ s.icon }}</div>
+                      <span style="font-size:12.5px;font-weight:500;color:#0A0A0A;">{{ s.label }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="flex:1;overflow-y:auto;min-height:0;padding:0 20px 12px;">
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+                    <sc-for list="{{ f.avatarChoices }}" as="a" hint-placeholder-count="12">
+                      <div onClick="{{ a.onPick }}" style="aspect-ratio:1;border-radius:50%;background:{{ a.bg }};box-shadow:{{ a.ring }};cursor:pointer;transition:box-shadow .18s;"></div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="flex:none;padding:10px 20px 0;">
+                  <div onClick="{{ f.onCloseAvatars }}" style="height:54px;border-radius:27px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <span style="font-size:17px;font-weight:600;color:#fff;letter-spacing:-.2px;">Готово</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showConfirmAlert }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:57;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.2);animation:fadeIn .2s both;">
+              <div style="width:270px;border-radius:14px;overflow:hidden;background:rgba(250,250,250,.94);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);box-shadow:0 20px 50px rgba(0,0,0,.2);animation:popIn .26s cubic-bezier(.2,.9,.3,1.2) both;">
+                <div style="padding:19px 16px 15px;text-align:center;">
+                  <div style="font-size:17px;font-weight:600;color:#0A0A0A;letter-spacing:-.4px;">Номер введён верно?</div>
+                  <div style="font-size:16px;font-weight:700;color:#0A0A0A;margin-top:4px;font-variant-numeric:tabular-nums;">{{ f.fullPhone }}</div>
+                  <div style="font-size:13px;line-height:1.35;color:#3C3C43;opacity:.75;margin-top:6px;">Мы отправим код подтверждения на этот номер.</div>
+                </div>
+                <div style="height:0.5px;background:rgba(60,60,67,.29);"></div>
+                <div style="display:flex;">
+                  <div onClick="{{ f.onEditNumber }}" style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <span style="font-size:17px;color:#1976FF;letter-spacing:-.4px;">Изменить</span>
+                  </div>
+                  <div style="width:0.5px;background:rgba(60,60,67,.29);"></div>
+                  <div onClick="{{ f.onConfirmNumber }}" style="flex:1;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <span style="font-size:17px;font-weight:600;color:#1976FF;letter-spacing:-.4px;">Да</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showMethodSheet }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:56;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,.32);">
+              <div onClick="{{ f.onBackToPhone }}" style="flex:1;cursor:pointer;"></div>
+              <div style="flex:none;background:#F7F7FA;border-radius:26px 26px 0 0;padding:9px 18px 30px;box-shadow:0 -18px 44px rgba(0,0,0,.2);display:flex;flex-direction:column;animation:sheetUp .32s cubic-bezier(.2,.9,.3,1) both;">
+              <div style="flex:none;width:36px;height:5px;border-radius:3px;background:#D4D4DA;margin:0 auto 14px;"></div>
+
+              <div style="flex:none;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px;">
+                <h2 style="margin:0 0 4px;font-size:20px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Выберите, куда придёт SMS</h2>
+                <p style="margin:0;font-size:14px;line-height:1.4;color:#6B6B70;">Номер <span style="color:#0A0A0A;font-weight:700;">{{ f.fullPhone }}</span></p>
+              </div>
+
+              <div style="flex:none;display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
+                <sc-for list="{{ f.otpChannels }}" as="ch" hint-placeholder-count="1">
+                  <div onClick="{{ ch.onTap }}" style="height:50px;border-radius:25px;background:{{ ch.bg }};display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;">
+                    <span style="font-size:16px;font-weight:600;color:#fff;letter-spacing:-.1px;">{{ ch.label }}</span>
+                    <div style="display:flex;">{{ ch.icon }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ f.noSmsInCountry }}" hint-placeholder-val="{{ false }}">
+                <p style="flex:none;margin:-2px 8px 8px;font-size:12px;line-height:1.4;color:#8E8E93;text-align:center;">{{ f.channelHint }}</p>
+              </sc-if>
+
+
+              <p style="flex:none;margin:16px 6px 6px;font-size:12px;line-height:1.5;color:#8E8E93;text-align:center;">Продолжая, вы соглашаетесь с <span style="color:#1976FF;">Условиями</span> и <span style="color:#1976FF;">Политикой конфиденциальности</span>.</p>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isOtp }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:10px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px;">
+                <h2 style="margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">{{ f.otpTitle }}</h2>
+                <p style="margin:0;font-size:14px;line-height:1.4;color:#6B6B70;">{{ f.otpSentPrefix }}<span style="color:#0A0A0A;font-weight:500;">{{ f.fullPhone }}</span></p>
+              </div>
+
+              <div style="display:flex;gap:8px;justify-content:center;animation:{{ f.otpShake }};">
+                <sc-for list="{{ f.otpCells }}" as="c" hint-placeholder-count="6">
+                  <div style="width:46px;height:56px;border-radius:12px;background:{{ c.bg }};box-shadow:{{ c.shadow }};display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:600;color:{{ c.color }};letter-spacing:-.5px;font-variant-numeric:tabular-nums;position:relative;">
+                    {{ c.ch }}
+                    <sc-if value="{{ c.caret }}" hint-placeholder-val="{{ false }}">
+                      <span style="position:absolute;width:2px;height:26px;background:#1976FF;animation:blink 1s steps(2) infinite;"></span>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+
+              <sc-if value="{{ f.otpError }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.4v.1"></path></svg>
+                  <span style="font-size:14px;font-weight:500;color:#E53935;">Неверный код · попробуйте снова</span>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ f.otpWaiting }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:18px;">
+                  <sc-if value="{{ f.timerRunning }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size:14px;color:#8E8E93;">{{ f.otpResendLabel }}<span style="color:#0A0A0A;font-weight:500;font-variant-numeric:tabular-nums;">{{ f.timerLabel }}</span></span>
+                  </sc-if>
+                  <sc-if value="{{ f.canResend }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ f.onResend }}" style="display:flex;align-items:center;gap:7px;height:44px;padding:0 20px;border-radius:22px;background:#1976FF;cursor:pointer;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"></path><path d="M3 3.5V9h5.5"></path></svg>
+                      <span style="font-size:16px;font-weight:600;color:#fff;letter-spacing:-.1px;">Отправить снова</span>
+                    </div>
+                  </sc-if>
+                  <div onClick="{{ f.onBackToPhone }}" style="cursor:pointer;"><span style="font-size:15px;font-weight:500;color:#1976FF;">Изменить номер</span></div>
+                </div>
+              </sc-if>
+
+              <div style="flex:1;"></div>
+
+              <div onClick="{{ f.onVerify }}" style="flex:none;height:52px;border-radius:26px;background:{{ f.otpCtaBg }};box-shadow:{{ f.otpCtaShadow }};display:flex;align-items:center;justify-content:center;gap:10px;cursor:{{ f.otpCtaCursor }};margin-bottom:{{ f.otpCtaGap }};transition:background .2s;">
+                <sc-if value="{{ f.verifying }}" hint-placeholder-val="{{ false }}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" style="animation:spin .9s linear infinite;"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-opacity="0.3" stroke-width="2.4"></circle><path d="M21 12a9 9 0 00-9-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"></path></svg>
+                </sc-if>
+                <span style="font-size:17px;font-weight:600;color:{{ f.otpCtaColor }};">{{ f.otpCtaLabel }}</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isPasskey }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:6px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:14px;">
+                <div style="position:relative;margin-bottom:18px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:92px;height:92px;border-radius:24px;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;">
+                    <div style="display:flex;">{{ f.pkHeroIcon }}</div>
+                  </div>
+                  <span style="position:absolute;top:-4px;right:-8px;animation:sparkle 2.2s ease-in-out infinite;"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M6 0l1.4 4.6L12 6l-4.6 1.4L6 12 4.6 7.4 0 6l4.6-1.4z" fill="#1976FF"></path></svg></span>
+                  <span style="position:absolute;bottom:-2px;left:-10px;animation:sparkle 2.6s ease-in-out infinite .8s;"><svg viewBox="0 0 12 12" width="8" height="8"><path d="M6 0l1.4 4.6L12 6l-4.6 1.4L6 12 4.6 7.4 0 6l4.6-1.4z" fill="#1E7DFF"></path></svg></span>
+                  <span style="position:absolute;top:8px;left:-14px;animation:sparkle 3s ease-in-out infinite 1.4s;"><svg viewBox="0 0 12 12" width="6" height="6"><path d="M6 0l1.4 4.6L12 6l-4.6 1.4L6 12 4.6 7.4 0 6l4.6-1.4z" fill="#1976FF"></path></svg></span>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.6px;color:#0A0A0A;">{{ f.pkTitle }}</h2>
+                <p style="margin:0 0 22px;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">{{ f.pkSubtitle }}</p>
+                <div style="width:100%;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 12px 30px rgba(15,39,80,.08);padding:4px 18px;">
+                  <sc-for list="{{ f.passkeyBenefits }}" as="b" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:{{ b.divider }};text-align:left;">
+                      <div style="width:28px;height:28px;border-radius:14px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="font-size:14px;font-weight:500;color:#0A0A0A;">{{ b.title }}</div>
+                        <div style="font-size:12px;color:#6B6B70;margin-top:1px;">{{ b.sub }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div onClick="{{ f.onCreatePasskey }}" style="height:50px;border-radius:25px;background:{{ f.pkCtaBg }};border:{{ f.pkCtaBorder }};display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-bottom:6px;">
+                <sc-if value="{{ f.pkCtaHasIcon }}" hint-placeholder-val="{{ false }}">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                </sc-if>
+                <sc-if value="{{ f.pkCtaHasGoogle }}" hint-placeholder-val="{{ false }}">
+                  <svg width="19" height="19" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.32z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"></path></svg>
+                </sc-if>
+                <span style="font-size:16px;font-weight:600;color:{{ f.pkCtaColor }};letter-spacing:-.1px;">{{ f.pkCtaLabel }}</span>
+              </div>
+              <div onClick="{{ f.onBackToPhone }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;">
+                <span style="font-size:15px;font-weight:500;color:#1976FF;">Пропустить</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isProfile }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 24px 0;position:relative;z-index:2;">
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <h2 style="margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Расскажите о себе</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">Имя и фото увидят ваши собеседники.</p>
+              </div>
+
+              <div style="display:flex;justify-content:center;margin-bottom:22px;">
+                <div onClick="{{ f.onToggleAvatar }}" style="position:relative;width:112px;height:112px;border-radius:56px;background:{{ f.avatarBg }};box-shadow:{{ f.avatarShadow }};display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .25s;">
+
+                  <sc-if value="{{ f.noAvatar }}" hint-placeholder-val="{{ true }}">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#A6ACBA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg>
+                  </sc-if>
+                  <div style="position:absolute;bottom:2px;right:2px;width:34px;height:34px;border-radius:17px;background:{{ f.avatarBadgeBg }};display:flex;align-items:center;justify-content:center;box-shadow:{{ f.avatarBadgeShadow }};">{{ f.avatarBadgeIcon }}</div>
+                </div>
+              </div>
+
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:4px 18px;">
+                <div style="padding:12px 0;">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:2px;">Имя</div>
+                  <div style="display:flex;align-items:center;">
+                    <span style="font-size:17px;color:{{ f.nameColor }};">{{ f.nameText }}</span>
+                    <span style="display:inline-block;width:2px;height:22px;background:#1976FF;margin-left:2px;animation:blink 1s steps(2) infinite;"></span>
+                  </div>
+                </div>
+              </div>
+
+              <p style="margin:14px 6px 0;font-size:12px;line-height:1.5;color:#8E8E93;">Имя и фото можно изменить позже в настройках.</p>
+
+              <div style="flex:1;"></div>
+
+              <div onClick="{{ f.onFinishProfile }}" style="height:52px;border-radius:26px;background:{{ f.nameCtaBg }};box-shadow:{{ f.nameCtaShadow }};display:flex;align-items:center;justify-content:center;cursor:{{ f.nameCtaCursor }};margin-bottom:10px;transition:background .2s;">
+                <span style="font-size:17px;font-weight:600;color:{{ f.nameCtaColor }};">Готово</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isDone }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 24px 0;position:relative;z-index:2;">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;">
+                <div style="position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center;">
+                  <div style="position:absolute;inset:0;border-radius:48px;background:#34C759;animation:ringOut 1.6s ease-out infinite;"></div>
+                  <div style="position:relative;width:96px;height:96px;border-radius:48px;background:#34C759;display:flex;align-items:center;justify-content:center;animation:popIn .5s cubic-bezier(.2,.9,.3,1.2) both;box-shadow:0 18px 36px rgba(52,199,89,.32);">
+                    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5 10-11" stroke-dasharray="60" style="animation:drawCheck .5s .18s ease-out both;"></path></svg>
+                  </div>
+                </div>
+                <div>
+                  <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;letter-spacing:-.6px;color:#0A0A0A;">{{ f.doneTitle }}</h2>
+                  <p style="margin:0;font-size:15px;line-height:1.45;color:#6B6B70;max-width:280px;">{{ f.doneSubtitle }}</p>
+                </div>
+              </div>
+              <div onClick="{{ f.onReset }}" style="height:54px;border-radius:27px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:10px;">
+                <span style="font-size:17px;font-weight:600;color:#fff;letter-spacing:-.1px;">Начать общаться</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isSuccess }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px 60px;position:relative;z-index:2;">
+              <div style="position:absolute;top:26%;left:50%;transform:translate(-50%,-50%);width:360px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(52,199,89,.08) 0%,transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+              <div style="position:relative;width:120px;height:120px;border-radius:60px;background:#34C759;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 36px rgba(52,199,89,.33);animation:popIn .5s cubic-bezier(.2,.9,.3,1.2) both;">
+                <span style="position:absolute;inset:0;border-radius:60px;border:2px solid #34C759;animation:ringOut 1.8s ease-out infinite;"></span>
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" stroke-dasharray="60" style="animation:drawCheck .5s .18s ease-out both;"></polyline></svg>
+              </div>
+              <h2 style="margin:32px 0 8px;font-size:26px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;text-align:center;">{{ f.successTitle }}</h2>
+              <sc-if value="{{ f.successHasSub }}" hint-placeholder-val="{{ true }}">
+                <p style="margin:0;font-size:15px;line-height:1.45;color:#6B6B70;text-align:center;max-width:300px;">{{ f.successSub }}</p>
+              </sc-if>
+              <sc-if value="{{ f.successHasPairedHero }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:14px;margin-top:-80px;margin-bottom:32px;">
+                  <div style="width:64px;height:64px;border-radius:16px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                  </div>
+                  <div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </div>
+                  <div style="width:64px;height:64px;border-radius:16px;background:#1976FF;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:28px;font-weight:700;color:#fff;letter-spacing:-1px;">L</span>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ f.successHasChip }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:28px;padding:8px 14px;border-radius:12px;background:{{ f.successChipBg }};display:flex;align-items:center;gap:8px;">
+                  <div style="display:flex;">{{ f.successChipIcon }}</div>
+                  <span style="font-size:13px;font-weight:500;color:{{ f.successChipColor }};">{{ f.successChipText }}</span>
+                  <sc-if value="{{ f.successChipHasCheck }}" hint-placeholder-val="{{ false }}">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ f.successChipCheckColor }}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isReturn }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="flex:none;display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:14px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+
+              <div style="flex:none;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <div style="width:84px;height:84px;border-radius:42px;background:linear-gradient(135deg,#FF6B5C,#FF9F0A);display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 0 4px #fff;">
+                  <span style="font-size:34px;font-weight:600;color:#fff;letter-spacing:-1px;">А</span>
+                </div>
+                <h2 style="margin:0 0 5px;font-size:22px;font-weight:700;letter-spacing:-.6px;color:#0A0A0A;">С возвращением, Александр</h2>
+                <p style="margin:0;font-size:14px;line-height:1.4;color:#6B6B70;">Номер подтверждён · <span style="color:#0A0A0A;font-weight:500;">{{ f.fullPhone }}</span></p>
+              </div>
+
+              <div style="flex:none;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:4px 16px;">
+                <div style="padding:9px 0 3px;"><span style="font-size:12px;color:#8E8E93;">Этот аккаунт уже связан</span></div>
+                <sc-for list="{{ f.linkedMethods }}" as="m" hint-placeholder-count="3">
+                  <div onClick="{{ m.onTap }}" style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:{{ m.divider }};cursor:pointer;">
+                    <div style="width:32px;height:32px;border-radius:9px;background:{{ m.tileBg }};display:flex;align-items:center;justify-content:center;flex:none;">{{ m.icon }}</div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:14.5px;font-weight:500;color:#0A0A0A;">{{ m.title }}</div>
+                      <div style="font-size:12px;color:#6B6B70;margin-top:1px;">{{ m.sub }}</div>
+                    </div>
+                    <sc-if value="{{ m.fast }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:10px;font-weight:700;color:#1976FF;padding:2px 7px;border-radius:7px;background:rgba(25,118,255,.1);letter-spacing:.3px;flex:none;">БЫСТРО</span>
+                    </sc-if>
+                    <svg width="8" height="13" viewBox="0 0 9 15" fill="none" stroke="#C7C7CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M1.5 1.5l6 6-6 6"></path></svg>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="flex:1;min-height:12px;"></div>
+
+              <div onClick="{{ f.onScanFace }}" style="flex:none;height:50px;border-radius:25px;background:#1976FF;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;margin-bottom:6px;">
+                <svg width="18" height="18" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V14a4 4 0 014-4h8M54 22V14a4 4 0 00-4-4h-8M10 42v8a4 4 0 004 4h8M54 42v8a4 4 0 01-4 4h-8"></path><line x1="23" y1="28" x2="23" y2="32"></line><line x1="41" y1="28" x2="41" y2="32"></line><path d="M32 26v12l-3 3"></path><path d="M23 44c2 2.5 5 4 9 4s7-1.5 9-4"></path></svg>
+                <span style="font-size:16px;font-weight:600;color:#fff;letter-spacing:-.1px;">Войти по passkey</span>
+              </div>
+              <div onClick="{{ f.onContinueWithSms }}" style="flex:none;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:26px;">
+                <span style="font-size:15px;font-weight:500;color:#1976FF;">Пропустить</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isLocked }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 24px 0;position:relative;z-index:2;">
+              <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:360px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,159,10,.1) 0%,transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:22px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:28px;">
+                <div style="width:80px;height:80px;border-radius:22px;background:rgba(255,159,10,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF9F0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 018 0v4"></path><line x1="12" y1="15" x2="12" y2="17"></line></svg>
+                </div>
+                <h2 style="margin:0 0 10px;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Слишком много попыток</h2>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#6B6B70;max-width:300px;">Мы временно заблокировали ввод. Попробуйте через <span style="color:#0A0A0A;font-weight:600;font-variant-numeric:tabular-nums;">4:58</span>.</p>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;opacity:.45;pointer-events:none;">
+                <sc-for list="{{ f.otpCells }}" as="c" hint-placeholder-count="6">
+                  <div style="width:46px;height:56px;border-radius:12px;background:rgba(255,255,255,.7);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.10),0 6px 16px rgba(15,39,80,.04);"></div>
+                </sc-for>
+              </div>
+              <div style="display:flex;justify-content:center;margin-top:22px;">
+                <div onClick="{{ f.onBackToPhone }}" style="cursor:pointer;"><span style="font-size:14px;font-weight:500;color:#1976FF;">Изменить номер</span></div>
+              </div>
+              <div style="flex:1;"></div>
+              <div style="height:54px;border-radius:27px;background:#E5E5EA;display:flex;align-items:center;justify-content:center;margin-bottom:34px;">
+                <span style="font-size:17px;font-weight:600;color:#8E8E93;font-variant-numeric:tabular-nums;">Попробовать через 4:58</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isPkSignIn }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:16px 24px 0;position:relative;z-index:2;">
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <div style="width:80px;height:80px;border-radius:22px;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                  <svg width="50" height="50" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="5"></rect><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path><circle cx="44" cy="54" r="4.5" fill="#1976FF"></circle><path d="M44 58.5v7" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path></svg>
+                </div>
+                <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Войти по passkey</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">Выберите аккаунт. Подтвердите Face ID или Touch ID.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 12px 30px rgba(15,39,80,.08);padding:4px 16px;">
+                <sc-for list="{{ f.pkAccounts }}" as="a" hint-placeholder-count="2">
+                  <div onClick="{{ a.onPick }}" style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:{{ a.divider }};cursor:pointer;">
+                    <div style="width:40px;height:40px;border-radius:20px;background:{{ a.tint }};display:flex;align-items:center;justify-content:center;flex:none;"><span style="font-size:15px;font-weight:600;color:#fff;">{{ a.initial }}</span></div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:15px;font-weight:500;color:#0A0A0A;">{{ a.name }}</div>
+                      <div style="font-size:13px;color:#6B6B70;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ a.handle }}</div>
+                    </div>
+                    <sc-if value="{{ a.primary }}" hint-placeholder-val="{{ false }}">
+                      <div style="padding:3px 8px;border-radius:8px;background:rgba(25,118,255,.1);flex:none;"><span style="font-size:11px;font-weight:600;color:#1976FF;letter-spacing:.2px;">PASSKEY</span></div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:14px;height:44px;border-radius:22px;border:0.5px solid rgba(15,39,80,.12);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;gap:8px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span style="font-size:14px;font-weight:500;color:#0A0A0A;">Другой аккаунт</span>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onScanFace }}" style="height:50px;border-radius:25px;background:#1976FF;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:6px;">
+                <svg width="18" height="18" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V14a4 4 0 014-4h8M54 22V14a4 4 0 00-4-4h-8M10 42v8a4 4 0 004 4h8M54 42v8a4 4 0 01-4 4h-8"></path><line x1="23" y1="28" x2="23" y2="32"></line><line x1="41" y1="28" x2="41" y2="32"></line><path d="M32 26v12l-3 3"></path><path d="M23 44c2 2.5 5 4 9 4s7-1.5 9-4"></path></svg>
+                <span style="font-size:16px;font-weight:600;color:#fff;letter-spacing:-.1px;">Войти через Face ID</span>
+              </div>
+              <div onClick="{{ f.onBackToPhone }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;"><span style="font-size:15px;font-weight:500;color:#1976FF;">Войти иначе</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isPkExists }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:16px 24px 0;position:relative;z-index:2;">
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <div style="position:relative;margin-bottom:18px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="position:relative;width:92px;height:92px;border-radius:24px;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;">
+                    <svg width="58" height="58" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="5"></rect><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path><circle cx="44" cy="54" r="4.5" fill="#1976FF"></circle><path d="M44 58.5v7" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path></svg>
+                    <div style="position:absolute;bottom:-4px;right:-4px;width:28px;height:28px;border-radius:14px;background:#34C759;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Passkey уже создан</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">Для этого аккаунта на устройстве уже есть passkey. Используйте его, чтобы войти.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:14px 16px;display:flex;align-items:center;gap:12px;">
+                <div style="width:40px;height:40px;border-radius:20px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">
+                  <svg width="22" height="22" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="7"></rect><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="7" stroke-linecap="round"></path><circle cx="44" cy="54" r="4.5" fill="#1976FF"></circle><path d="M44 58.5v7" stroke="#1976FF" stroke-width="7" stroke-linecap="round"></path></svg>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:15px;font-weight:500;color:#0A0A0A;">sasha@icloud.com</div>
+                  <div style="font-size:12px;color:#6B6B70;">iPhone · создан 12 апреля</div>
+                </div>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onScanFace }}" style="height:50px;border-radius:25px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Войти с существующим</span>
+              </div>
+              <div onClick="{{ f.onCreatePasskey }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:34px;"><span style="font-size:14px;font-weight:500;color:#6B6B70;">Создать новый passkey</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isPkBackup }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:12px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px;">
+                <div style="margin-bottom:18px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:88px;height:88px;border-radius:22px;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a3 3 0 01-3 3h-11a4 4 0 01-.8-7.9A5 5 0 0115 8.6a3.5 3.5 0 015.5 2.9 3 3 0 010 4z"></path><path d="M12 17.5v-6M9.6 13.6L12 11.2l2.4 2.4"></path></svg>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Доступ со всех устройств Apple</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:320px;">Включите iCloud Keychain — и passkey будет работать на iPhone, iPad и Mac.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:4px 16px;">
+                <sc-for list="{{ f.devices }}" as="d" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:{{ d.divider }};">
+                    <div style="width:28px;height:28px;border-radius:14px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:14px;font-weight:500;color:#0A0A0A;">{{ d.name }}</div>
+                      <div style="font-size:12px;color:#34C759;">{{ d.status }}</div>
+                    </div>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="flex:1;"></div>
+              <div style="height:50px;border-radius:25px;background:#1976FF;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Открыть настройки iCloud</span>
+              </div>
+              <div onClick="{{ f.onBackToPhone }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:34px;"><span style="font-size:14px;font-weight:500;color:#6B6B70;">Пропустить</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isPkQr }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:18px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Войти с другого устройства</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">Откройте Link на телефоне и отсканируйте код. Bluetooth должен быть включён.</p>
+              </div>
+              <div style="display:flex;justify-content:center;">
+                <div style="position:relative;padding:16px;border-radius:20px;background:#fff;box-shadow:0 18px 36px rgba(15,39,80,.1),0 0 0 1px rgba(15,39,80,.06);">
+                  <div style="width:180px;height:180px;display:grid;grid-template-columns:repeat(21,1fr);grid-template-rows:repeat(21,1fr);">
+                    <sc-for list="{{ f.qrCells }}" as="q" hint-placeholder-count="441">
+                      <div style="background:{{ q.bg }};"></div>
+                    </sc-for>
+                  </div>
+                  <span style="position:absolute;inset:-2px;border-radius:22px;box-shadow:0 0 24px rgba(25,118,255,.2);pointer-events:none;animation:faceScanGlow 2.2s ease-in-out infinite;"></span>
+                </div>
+              </div>
+              <div style="margin-top:24px;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:4px 16px;">
+                <sc-for list="{{ f.qrSteps }}" as="s" hint-placeholder-count="2">
+                  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:{{ s.divider }};">
+                    <div style="width:24px;height:24px;border-radius:12px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;"><span style="font-size:13px;font-weight:600;color:#1976FF;">{{ s.n }}</span></div>
+                    <div style="flex:1;">
+                      <div style="font-size:14px;font-weight:500;color:#0A0A0A;">{{ s.title }}</div>
+                      <div style="font-size:12px;color:#6B6B70;">{{ s.sub }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="flex:1;"></div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:38px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" style="animation:spin .9s linear infinite;"><circle cx="12" cy="12" r="9" fill="none" stroke="#1976FF" stroke-opacity="0.25" stroke-width="2.6"></circle><path d="M21 12a9 9 0 00-9-9" fill="none" stroke="#1976FF" stroke-width="2.6" stroke-linecap="round"></path></svg>
+                <span style="font-size:13px;color:#6B6B70;">Ожидаем подтверждения…</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isApple }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:14px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;">
+                <div style="margin-bottom:16px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:84px;height:84px;border-radius:22px;background:#0A0A0A;box-shadow:0 18px 36px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Войти через Apple</h2>
+                <p style="margin:0;font-size:13px;line-height:1.45;color:#6B6B70;max-width:300px;">Используйте Apple ID — без новых паролей и SMS.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                <div style="width:36px;height:36px;border-radius:18px;background:linear-gradient(135deg,#FF6B5C,#FF9F0A);display:flex;align-items:center;justify-content:center;flex:none;"><span style="font-size:14px;font-weight:600;color:#fff;">А</span></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:14px;font-weight:500;color:#0A0A0A;">Александр Соколов</div>
+                  <div style="font-size:12px;color:#6B6B70;">sasha@icloud.com</div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:0 16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div>
+                    <div style="font-size:13px;font-weight:500;color:#0A0A0A;">Поделиться e-mail</div>
+                    <div style="font-size:11px;color:#6B6B70;margin-top:1px;">sasha@icloud.com</div>
+                  </div>
+                  <div style="width:40px;height:24px;border-radius:12px;background:#34C759;display:flex;align-items:center;padding:2px;">
+                    <div style="margin-left:auto;width:20px;height:20px;border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;">
+                  <div>
+                    <div style="font-size:13px;font-weight:500;color:#0A0A0A;">Скрыть мой e-mail</div>
+                    <div style="font-size:11px;color:#6B6B70;margin-top:1px;">Apple создаст уникальный адрес</div>
+                  </div>
+                  <div style="width:40px;height:24px;border-radius:12px;background:#E5E5EA;padding:2px;">
+                    <div style="width:20px;height:20px;border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onAppleConfirm }}" style="height:50px;border-radius:14px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                <span style="font-size:16px;font-weight:600;color:#fff;">Продолжить с Apple</span>
+              </div>
+              <div style="height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;"><span style="font-size:14px;font-weight:500;color:#1976FF;">Использовать другой Apple ID</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isAppleLink }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:12px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:20px;">
+                <div style="display:flex;align-items:center;margin-bottom:16px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:56px;height:56px;border-radius:14px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.18);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                  </div>
+                  <div style="width:24px;height:24px;border-radius:12px;background:linear-gradient(90deg,#0A0A0A 0%,#1976FF 100%);margin:0 -6px;z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 007.5 0l3-3a5 5 0 00-7.5-7.5l-1 1"></path><path d="M14 10a5 5 0 00-7.5 0l-3 3a5 5 0 007.5 7.5l1-1"></path></svg>
+                  </div>
+                  <img src="assets/link-logo.png" width="56" height="56" alt="Link" style="border-radius:14px;display:block;box-shadow:0 10px 24px rgba(25,118,255,.33);">
+                </div>
+                <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Привязать Apple ID</h2>
+                <p style="margin:0;font-size:13px;line-height:1.45;color:#6B6B70;max-width:300px;">Добавьте Apple ID к Link, чтобы заходить одним прикосновением.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-radius:16px;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 8px 22px rgba(15,39,80,.06);padding:0 16px;">
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div style="width:30px;height:30px;border-radius:15px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:13px;font-weight:500;color:#0A0A0A;">{{ f.fullPhone }}</div>
+                    <div style="font-size:11px;color:#6B6B70;">основной способ входа</div>
+                  </div>
+                  <span style="font-size:10px;font-weight:600;color:#1976FF;padding:2px 7px;border-radius:8px;background:rgba(25,118,255,.1);letter-spacing:.2px;">СЕЙЧАС</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 0;">
+                  <div style="width:30px;height:30px;border-radius:15px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;flex:none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-size:13px;font-weight:500;color:#0A0A0A;">Apple ID</div>
+                    <div style="font-size:11px;color:#6B6B70;">sasha@icloud.com</div>
+                  </div>
+                  <span style="font-size:10px;font-weight:600;color:#34C759;padding:2px 7px;border-radius:8px;background:rgba(52,199,89,.15);letter-spacing:.2px;">НОВОЕ</span>
+                </div>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onAppleConfirm }}" style="height:50px;border-radius:14px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                <span style="font-size:16px;font-weight:600;color:#fff;">Привязать Apple ID</span>
+              </div>
+              <div style="height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;"><span style="font-size:14px;font-weight:500;color:#6B6B70;">Не сейчас</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isRestoreChoice }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:18px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:26px;">
+                <div style="margin-bottom:18px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:84px;height:84px;border-radius:22px;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5"></path><path d="M12 7v6l4 2"></path></svg>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Восстановить чаты</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:300px;">Где сохранена ваша история сообщений?</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <sc-for list="{{ f.restoreOptions }}" as="o" hint-placeholder-count="3">
+                  <div onClick="{{ o.onPick }}" style="background:{{ o.bg }};backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:18px;box-shadow:{{ o.shadow }};padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;">
+                    <div style="width:40px;height:40px;border-radius:12px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">{{ o.icon }}</div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:15px;font-weight:600;color:#0A0A0A;">{{ o.title }}</span>
+                        <sc-if value="{{ o.recommended }}" hint-placeholder-val="{{ false }}">
+                          <span style="font-size:10px;font-weight:700;color:#1976FF;padding:2px 6px;border-radius:6px;background:rgba(25,118,255,.1);letter-spacing:.4px;">РЕКОМЕНДУЕМ</span>
+                        </sc-if>
+                      </div>
+                      <div style="font-size:12px;color:#6B6B70;margin-top:1px;">{{ o.sub }}</div>
+                      <div style="font-size:11px;color:#9A9A9F;margin-top:2px;">{{ o.meta }}</div>
+                    </div>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="flex:1;"></div>
+              <div style="height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;"><span style="font-size:14px;font-weight:500;color:#6B6B70;">Пропустить</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isRestoreFound }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackToPhone }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:18px;">
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9.5 1L2 9l7.5 8" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px;">
+                <div style="margin-bottom:18px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:92px;height:92px;border-radius:24px;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a3 3 0 01-3 3h-11a4 4 0 01-.8-7.9A5 5 0 0115 8.6a3.5 3.5 0 015.5 2.9 3 3 0 010 4z"></path></svg>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Найдена резервная копия</h2>
+                <p style="margin:0;font-size:14px;line-height:1.45;color:#6B6B70;max-width:320px;">Восстановите чаты, медиа и контакты с Link Cloud.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:20px;box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 10px 28px rgba(15,39,80,.06);padding:4px 18px;">
+                <sc-for list="{{ f.backupRows }}" as="r" hint-placeholder-count="4">
+                  <div style="display:flex;justify-content:space-between;padding:13px 0;border-bottom:{{ r.divider }};">
+                    <span style="font-size:14px;color:#6B6B70;">{{ r.k }}</span>
+                    <span style="font-size:14px;font-weight:500;color:#0A0A0A;">{{ r.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <p style="margin:14px 6px 0;font-size:12px;line-height:1.5;color:#8E8E93;">Скачивание займёт ~5 минут на Wi-Fi. Чаты будут зашифрованы вашим passkey.</p>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onRestore }}" style="height:52px;border-radius:26px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:6px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Восстановить</span>
+              </div>
+              <div style="height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;"><span style="font-size:14px;font-weight:500;color:#6B6B70;">Пропустить</span></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isRestoreProgress }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px 40px;position:relative;z-index:2;">
+              <div style="position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);width:360px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(30,125,255,.1) 0%,transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+              <div style="position:relative;width:200px;height:250px;display:flex;flex-direction:column;align-items:center;">
+                <div style="width:96px;height:64px;border-radius:32px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.65));backdrop-filter:saturate(200%) blur(24px);box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 12px 24px rgba(25,118,255,.13);display:flex;align-items:center;justify-content:center;z-index:3;">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a3 3 0 01-3 3h-11a4 4 0 01-.8-7.9A5 5 0 0115 8.6a3.5 3.5 0 015.5 2.9 3 3 0 010 4z"></path></svg>
+                </div>
+                <div style="position:absolute;left:0;right:0;top:56px;bottom:80px;pointer-events:none;">
+                  <sc-for list="{{ f.streamIcons }}" as="s" hint-placeholder-count="4">
+                    <div style="position:absolute;left:50%;top:0;width:36px;height:36px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px rgba(15,39,80,.06),0 6px 16px rgba(30,125,255,.18);display:flex;align-items:center;justify-content:center;animation:dataStream 2.6s ease-in-out infinite {{ s.delay }};">{{ s.icon }}</div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;bottom:0;width:120px;height:120px;border-radius:60px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.55));backdrop-filter:saturate(200%) blur(24px);box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(25,118,255,.2);display:flex;align-items:center;justify-content:center;z-index:4;">
+                  <svg width="120" height="120" viewBox="0 0 120 120" style="position:absolute;inset:0;transform:rotate(-90deg);">
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(15,39,80,0.08)" stroke-width="6"></circle>
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="#1976FF" stroke-width="6" stroke-linecap="round" stroke-dasharray="137 327"></circle>
+                  </svg>
+                  <div style="animation:downloadArrow 1.4s ease-in-out infinite;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:4px;margin-top:26px;">
+                <span style="font-size:36px;font-weight:700;color:#0A0A0A;letter-spacing:-1px;font-variant-numeric:tabular-nums;">42</span>
+                <span style="font-size:20px;font-weight:600;color:#6B6B70;">%</span>
+              </div>
+              <h2 style="margin:6px 0;font-size:20px;font-weight:600;letter-spacing:-.4px;color:#0A0A0A;text-align:center;">Восстанавливаем чаты…</h2>
+              <p style="margin:0;font-size:13px;color:#6B6B70;text-align:center;max-width:280px;">1,8 ГБ из 4,2 ГБ · осталось ~3 мин</p>
+              <div style="margin-top:22px;font-size:12px;color:#9A9A9F;">Не закрывайте приложение</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isBlocked }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:14px 24px 0;position:relative;z-index:2;">
+              <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:360px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(229,57,53,.08) 0%,transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px;">
+                <div style="margin-bottom:20px;animation:heroFloat 3.4s ease-in-out infinite;">
+                  <div style="width:96px;height:96px;border-radius:24px;background:rgba(229,57,53,.09);display:flex;align-items:center;justify-content:center;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 018 0v4"></path><line x1="12" y1="15" x2="12" y2="17"></line></svg>
+                  </div>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Аккаунт заблокирован</h2>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#6B6B70;max-width:320px;">Вход в Link временно ограничен. Подробности — ниже.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:20px;box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 10px 28px rgba(15,39,80,.06);padding:4px 18px;margin-bottom:12px;">
+                <div style="padding:12px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:4px;">Причина</div>
+                  <div style="font-size:14px;color:#0A0A0A;line-height:1.4;">Нарушение пункта 4.2 — массовая отправка нежелательных сообщений</div>
+                </div>
+                <div style="padding:12px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:4px;">Дата нарушения</div>
+                  <div style="font-size:14px;color:#0A0A0A;">14 мая 2026, 22:41</div>
+                </div>
+                <div style="padding:12px 0;">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:4px;">Разблокировка</div>
+                  <div style="display:flex;align-items:baseline;gap:8px;">
+                    <span style="font-size:14px;font-weight:600;color:#0A0A0A;">21 мая 2026, 22:41</span>
+                    <span style="font-size:12px;font-weight:500;color:#E53935;">через 6 дней 18 ч</span>
+                  </div>
+                </div>
+              </div>
+              <div style="height:44px;border-radius:22px;border:0.5px solid rgba(15,39,80,.10);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 16px;">
+                <span style="font-size:14px;font-weight:500;color:#0A0A0A;">Правила сообщества Link</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onAppeal }}" style="height:52px;border-radius:26px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:34px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Оспорить блокировку</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isAppeal }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:4px 24px 0;position:relative;z-index:2;">
+              <div onClick="{{ f.onBackBlocked }}" style="width:40px;height:40px;border-radius:9999px;background:rgba(255,255,255,.55);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 6px 14px rgba(15,39,80,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 0 14px -8px;">
+                <svg width="14" height="22" viewBox="0 0 14 22" fill="none"><path d="M11 1L1.5 11l9.5 10" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <h2 style="margin:0 0 8px;font-size:30px;font-weight:700;letter-spacing:-.6px;color:#0A0A0A;">Оспорить блокировку</h2>
+              <p style="margin:0 0 20px;font-size:14px;line-height:1.45;color:#6B6B70;">Опишите ситуацию. Модератор ответит в течение 48 часов.</p>
+              <div style="background:rgba(255,255,255,.6);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:18px;box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 8px 22px rgba(15,39,80,.06);padding:4px 18px;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+                  <div>
+                    <div style="font-size:12px;color:#8E8E93;margin-bottom:2px;">Причина обжалования</div>
+                    <div style="font-size:16px;color:#0A0A0A;">Я не нарушал правила</div>
+                  </div>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A6ACBA" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,.6);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:18px;box-shadow:0 0 0 2px #1976FF,0 1.5px 1px rgba(255,255,255,.7) inset,0 8px 22px rgba(30,125,255,.1);padding:12px 16px;margin-bottom:12px;min-height:150px;">
+                <div style="font-size:12px;font-weight:500;color:#1976FF;margin-bottom:6px;">Объяснение</div>
+                <div style="font-size:15px;color:#0A0A0A;line-height:1.45;">Я не отправлял спам. 14 мая мой телефон взяли друзья и использовали мой аккаунт без моего ведома…<span style="display:inline-block;width:2px;height:18px;background:#1976FF;margin-left:2px;vertical-align:middle;animation:blink 1s steps(2) infinite;"></span></div>
+                <div style="margin-top:12px;font-size:11px;color:#8E8E93;text-align:right;">132 / 500</div>
+              </div>
+              <div style="height:56px;border-radius:16px;border:0.5px solid rgba(15,39,80,.10);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);display:flex;align-items:center;gap:12px;padding:0 16px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:rgba(25,118,255,.08);display:flex;align-items:center;justify-content:center;flex:none;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"></path></svg>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:14px;font-weight:500;color:#0A0A0A;">Прикрепить доказательства</div>
+                  <div style="font-size:11px;color:#8E8E93;margin-top:1px;">Скриншоты, фото · до 10 МБ</div>
+                </div>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onAppealSend }}" style="height:52px;border-radius:26px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:34px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Отправить</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.isAppealSent }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:26px 24px 0;position:relative;z-index:2;">
+              <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:26px;">
+                <div style="position:relative;width:96px;height:96px;border-radius:48px;background:#34C759;display:flex;align-items:center;justify-content:center;margin-bottom:24px;box-shadow:0 18px 36px rgba(52,199,89,.33);animation:popIn .5s cubic-bezier(.2,.9,.3,1.2) both;">
+                  <span style="position:absolute;inset:0;border-radius:48px;border:2px solid #34C759;animation:ringOut 1.8s ease-out infinite;"></span>
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" stroke-dasharray="60" style="animation:drawCheck .5s .18s ease-out both;"></polyline></svg>
+                </div>
+                <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.5px;color:#0A0A0A;">Обращение отправлено</h2>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#6B6B70;max-width:320px;">Мы рассмотрим вашу жалобу и пришлём ответ на ваш номер.</p>
+              </div>
+              <div style="background:rgba(255,255,255,.7);backdrop-filter:saturate(200%) blur(24px);-webkit-backdrop-filter:saturate(200%) blur(24px);border-radius:20px;box-shadow:0 1.5px 1px rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 10px 28px rgba(15,39,80,.06);padding:4px 18px;">
+                <div style="padding:13px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:4px;">Номер обращения</div>
+                  <div style="font-size:15px;font-weight:600;color:#0A0A0A;font-variant-numeric:tabular-nums;">#A-2026-58104</div>
+                </div>
+                <div style="padding:13px 0;border-bottom:0.5px solid rgba(15,39,80,.08);">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:4px;">Статус обращения</div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:6px;height:6px;border-radius:3px;background:#34C759;"></span>
+                    <span style="font-size:14px;font-weight:500;color:#34C759;">Рассмотрено</span>
+                  </div>
+                </div>
+                <div style="padding:13px 0;">
+                  <div style="font-size:12px;color:#8E8E93;margin-bottom:6px;">Ответ модерации</div>
+                  <div style="display:flex;gap:10px;">
+                    <div style="width:28px;height:28px;border-radius:14px;background:rgba(25,118,255,.1);display:flex;align-items:center;justify-content:center;flex:none;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v7a2.5 2.5 0 01-2.5 2.5H9l-5 4V6.5z"></path></svg>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:14px;line-height:1.45;color:#0A0A0A;">Обращение принято и передано на проверку. Решение придёт в Link и на ваш номер в течение 48 часов.</div>
+                      <div style="font-size:12px;color:#8E8E93;margin-top:4px;">Системное уведомление · сегодня, 10:12</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="flex:1;"></div>
+              <div onClick="{{ f.onReset }}" style="height:52px;border-radius:26px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:34px;">
+                <span style="font-size:16px;font-weight:600;color:#fff;">Готово</span>
+              </div>
+            </div>
+          </sc-if>
+
+
+          <sc-if value="{{ f.showNumPad }}" hint-placeholder-val="{{ true }}">
+            <div style="flex:none;position:relative;z-index:15;border-radius:27px 27px 0 0;padding:9px 0 2px;background:rgba(242,242,247,.86);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);box-shadow:0 -1px 6px rgba(0,0,0,.02),0 -3px 20px rgba(0,0,0,.012);">
+              <div style="height:44px;display:flex;align-items:center;padding:0 6px;">
+                <sc-for list="{{ f.quickType }}" as="q" hint-placeholder-count="3">
+                  <div onClick="{{ q.onTap }}" style="flex:1;height:100%;display:flex;align-items:center;justify-content:center;cursor:{{ q.cursor }};border-left:{{ q.divider }};">
+                    <span style="font-size:17px;font-weight:{{ q.weight }};color:#0A0A0A;letter-spacing:-.43px;font-variant-numeric:tabular-nums;">{{ q.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 6px;padding:4px 6px 0;">
+                <sc-for list="{{ f.numKeys }}" as="k" hint-placeholder-count="12">
+                  <div onClick="{{ k.onTap }}" style="height:46px;border-radius:8.5px;background:{{ k.bg }};box-shadow:{{ k.shadow }};display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;">
+                    <span style="font-size:25px;font-weight:400;color:#0A0A0A;line-height:1;">{{ k.d }}</span>
+                    <sc-if value="{{ k.hasSub }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-size:9px;font-weight:600;letter-spacing:1.2px;color:#0A0A0A;opacity:.55;margin-top:2px;">{{ k.sub }}</span>
+                    </sc-if>
+                    <sc-if value="{{ k.isDel }}" hint-placeholder-val="{{ false }}">
+                      <svg width="24" height="18" viewBox="0 0 23 17"><path d="M7 1h13a2 2 0 012 2v11a2 2 0 01-2 2H7l-6-7.5L7 1z" fill="none" stroke="#595959" stroke-width="1.6" stroke-linejoin="round"></path><path d="M10 5l7 7M17 5l-7 7" stroke="#595959" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="height:38px;"></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showLetterPad }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:none;position:relative;z-index:15;border-radius:27px 27px 0 0;padding:9px 0 2px;background:rgba(242,242,247,.86);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);box-shadow:0 -1px 6px rgba(0,0,0,.02),0 -3px 20px rgba(0,0,0,.012);">
+              <div style="display:flex;gap:20px;align-items:center;padding:2px 22px 13px;">
+                <sc-for list="{{ f.nameSuggestions }}" as="s" hint-placeholder-count="3">
+                  <div onClick="{{ s.onTap }}" style="flex:1;text-align:center;cursor:pointer;border-left:{{ s.divider }};">
+                    <span style="font-size:17px;color:#333;letter-spacing:-.43px;">{{ s.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:13px;padding:0 6.5px;">
+                <sc-for list="{{ f.letterRows }}" as="row" hint-placeholder-count="3">
+                  <div style="display:flex;gap:6.5px;justify-content:center;padding:{{ row.pad }};">
+                    <sc-for list="{{ row.keys }}" as="k" hint-placeholder-count="11">
+                      <div onClick="{{ k.onTap }}" style="flex:1;height:42px;border-radius:8.5px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;cursor:pointer;min-width:0;">
+                        <span style="font-size:22px;font-weight:400;color:#595959;">{{ k.ch }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-for>
+                <div style="display:flex;gap:14.25px;align-items:center;">
+                  <div onClick="{{ f.onShift }}" style="width:45px;height:42px;border-radius:8.5px;background:{{ f.shiftBg }};box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <svg width="19" height="17" viewBox="0 0 19 17"><path d="M9.5 1L1 9.5h4.5V16h8V9.5H18L9.5 1z" fill="{{ f.shiftGlyph }}"></path></svg>
+                  </div>
+                  <div style="display:flex;gap:6.5px;flex:1;">
+                    <sc-for list="{{ f.bottomKeys }}" as="k" hint-placeholder-count="7">
+                      <div onClick="{{ k.onTap }}" style="flex:1;height:42px;border-radius:8.5px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;cursor:pointer;min-width:0;">
+                        <span style="font-size:22px;font-weight:400;color:#595959;">{{ k.ch }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div onClick="{{ f.onNameDel }}" style="width:45px;height:42px;border-radius:8.5px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <svg width="23" height="17" viewBox="0 0 23 17"><path d="M7 1h13a2 2 0 012 2v11a2 2 0 01-2 2H7l-6-7.5L7 1z" fill="none" stroke="#595959" stroke-width="1.6" stroke-linejoin="round"></path><path d="M10 5l7 7M17 5l-7 7" stroke="#595959" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                  <div style="width:92.25px;height:42px;border-radius:8.5px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;"><span style="font-size:18px;color:#595959;">123</span></div>
+                  <div onClick="{{ f.onSpace }}" style="flex:1;height:42px;border-radius:8.5px;background:rgba(255,255,255,.92);box-shadow:0 1px 0 rgba(0,0,0,.075);display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="font-size:16px;color:#8E8E93;">пробел</span></div>
+                  <div onClick="{{ f.onFinishProfile }}" style="width:92.25px;height:42px;border-radius:8.5px;background:#08f;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <svg width="20" height="14" viewBox="0 0 20 14"><path d="M18 1v6H4m0 0l4-4M4 7l4 4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </div>
+                </div>
+              </div>
+              <div style="height:34px;"></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showCountrySheet }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:55;display:flex;flex-direction:column;background:rgba(0,0,0,.28);">
+              <div onClick="{{ f.onBackToPhone }}" style="flex:none;height:52px;cursor:pointer;"></div>
+              <div style="flex:1;min-height:0;background:linear-gradient(180deg,#FBFBFD,#EFEFF4);border-radius:30px 30px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -18px 44px rgba(0,0,0,.24);animation:sheetUp .34s cubic-bezier(.2,.9,.3,1) both;">
+                <div style="flex:none;height:64px;display:flex;align-items:center;padding:0 16px;position:relative;">
+                  <div onClick="{{ f.onBackToPhone }}" style="width:44px;height:44px;border-radius:22px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+                  </div>
+                  <span style="position:absolute;left:0;right:0;text-align:center;font-size:22px;font-weight:700;color:#0A0A0A;letter-spacing:-.5px;pointer-events:none;">Страна</span>
+                </div>
+
+                <div style="flex:1;overflow-y:auto;min-height:0;padding:6px 0 0;position:relative;">
+                  <div style="position:absolute;top:20px;bottom:20px;right:3px;width:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;z-index:4;">
+                    <sc-for list="{{ f.alphaIndex }}" as="a" hint-placeholder-count="12">
+                      <span style="font-size:11px;font-weight:500;color:#1976FF;">{{ a.letter }}</span>
+                    </sc-for>
+                  </div>
+                  <sc-for list="{{ f.countryGroups }}" as="g" hint-placeholder-count="4">
+                    <div style="margin-bottom:14px;">
+                      <div style="padding:2px 22px 8px;"><span style="font-size:17px;font-weight:400;color:#6B6B70;">{{ g.letter }}</span></div>
+                      <div style="margin:0 16px;background:#fff;border-radius:20px;overflow:hidden;">
+                        <sc-for list="{{ g.items }}" as="c" hint-placeholder-count="4">
+                          <div onClick="{{ c.onPick }}" style="display:flex;align-items:center;gap:14px;padding:13px 18px;background:{{ c.rowBg }};cursor:pointer;position:relative;">
+                            <span style="font-size:23px;line-height:1;flex:none;width:28px;">{{ c.flag }}</span>
+                            <span style="flex:1;font-size:19px;color:#0A0A0A;letter-spacing:-.4px;">{{ c.name }}</span>
+                            <span style="font-size:18px;color:#8E8E93;font-variant-numeric:tabular-nums;">{{ c.dial }}</span>
+                            <sc-if value="{{ c.selected }}" hint-placeholder-val="{{ false }}">
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </sc-if>
+                            <div style="position:absolute;left:58px;right:18px;bottom:0;height:0.5px;background:{{ c.hairline }};"></div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <div style="flex:none;display:flex;align-items:center;gap:8px;padding:6px 14px 10px;">
+                  <div style="flex:1;height:46px;border-radius:23px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);display:flex;align-items:center;gap:9px;padding:0 18px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span style="display:inline-block;width:2px;height:20px;background:#1976FF;animation:blink 1s steps(2) infinite;"></span>
+                    <span style="flex:1;font-size:18px;color:#A6ACBA;letter-spacing:-.4px;">Поиск</span>
+                  </div>
+                  <div onClick="{{ f.onBackToPhone }}" style="width:46px;height:46px;border-radius:23px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+                  </div>
+                </div>
+
+                <div style="flex:none;background:#D3D5DB;padding:8px 0 4px;">
+                  <div style="display:flex;flex-direction:column;gap:11px;padding:0 5px;">
+                    <sc-for list="{{ f.searchRows }}" as="row" hint-placeholder-count="3">
+                      <div style="display:flex;gap:5px;justify-content:center;padding:{{ row.pad }};">
+                        <sc-for list="{{ row.keys }}" as="k" hint-placeholder-count="11">
+                          <div style="flex:1;height:40px;border-radius:6px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;min-width:0;">
+                            <span style="font-size:19px;color:#0A0A0A;">{{ k }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                    <div style="display:flex;gap:5px;align-items:center;">
+                      <div style="width:42px;height:40px;border-radius:6px;background:#AEB3BE;display:flex;align-items:center;justify-content:center;"><svg width="17" height="15" viewBox="0 0 19 17"><path d="M9.5 1L1 9.5h4.5V16h8V9.5H18L9.5 1z" fill="#0A0A0A"></path></svg></div>
+                      <div style="flex:1;display:flex;gap:5px;">
+                        <sc-for list="{{ f.searchBottom }}" as="k" hint-placeholder-count="7">
+                          <div style="flex:1;height:40px;border-radius:6px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;min-width:0;"><span style="font-size:19px;color:#0A0A0A;">{{ k }}</span></div>
+                        </sc-for>
+                      </div>
+                      <div style="width:42px;height:40px;border-radius:6px;background:#AEB3BE;display:flex;align-items:center;justify-content:center;"><svg width="21" height="15" viewBox="0 0 23 17"><path d="M7 1h13a2 2 0 012 2v11a2 2 0 01-2 2H7l-6-7.5L7 1z" fill="none" stroke="#0A0A0A" stroke-width="1.6" stroke-linejoin="round"></path><path d="M10 5l7 7M17 5l-7 7" stroke="#0A0A0A" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
+                    </div>
+                    <div style="display:flex;gap:5px;align-items:center;">
+                      <div style="width:42px;height:40px;border-radius:6px;background:#AEB3BE;display:flex;align-items:center;justify-content:center;"><span style="font-size:15px;color:#0A0A0A;">123</span></div>
+                      <div style="flex:1;height:40px;border-radius:6px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:15px;color:#8E8E93;">пробел</span></div>
+                      <div style="width:86px;height:40px;border-radius:6px;background:#0A84FF;display:flex;align-items:center;justify-content:center;">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="height:26px;"></div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ f.showFaceId }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,.35);backdrop-filter:brightness(.72);-webkit-backdrop-filter:brightness(.72);">
+              <div style="background:rgba(245,245,247,.92);backdrop-filter:saturate(180%) blur(30px);-webkit-backdrop-filter:saturate(180%) blur(30px);border-radius:22px 22px 0 0;padding:10px 18px 30px;box-shadow:0 -20px 40px rgba(0,0,0,.18);animation:{{ f.sheetAnim }};">
+                <div style="width:36px;height:5px;border-radius:3px;background:#D4D4DA;margin:0 auto 16px;"></div>
+
+                <sc-if value="{{ f.sheetIsCreateError }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff;border-radius:14px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;margin-bottom:14px;box-shadow:0 0 0 .5px rgba(0,0,0,.06);">
+                    <div style="width:76px;height:76px;border-radius:38px;background:rgba(229,57,53,.1);display:flex;align-items:center;justify-content:center;">
+                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    </div>
+                    <div style="font-size:16px;font-weight:600;color:#0A0A0A;margin-top:16px;text-align:center;">Не удалось создать passkey</div>
+                    <div style="font-size:14px;color:#6B6B70;margin-top:6px;text-align:center;max-width:280px;">Face ID не подтверждён. Попробуйте ещё раз или продолжите без passkey.</div>
+                  </div>
+                  <div onClick="{{ f.onCreatePasskey }}" style="height:50px;border-radius:14px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;">
+                    <span style="font-size:16px;font-weight:600;color:#fff;">Попробовать снова</span>
+                  </div>
+                  <div onClick="{{ f.onFaceIdCancel }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="font-size:16px;font-weight:500;color:#1976FF;">Не сейчас</span></div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetHasIdentity }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+                  <sc-if value="{{ f.sheetTileIsPasskey }}" hint-placeholder-val="{{ true }}">
+                    <div style="width:42px;height:42px;border-radius:9px;background:#000;display:flex;align-items:center;justify-content:center;flex:none;">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V8a3 3 0 013-3h2M19 11V8a3 3 0 00-3-3h-2M5 13v3a3 3 0 003 3h2M19 13v3a3 3 0 01-3 3h-2"></path><line x1="10" y1="11" x2="10" y2="13"></line><line x1="14" y1="11" x2="14" y2="13"></line><path d="M12 10v4l-1 1"></path><path d="M10 17c.6.6 1.4 1 2 1s1.4-.4 2-1"></path></svg>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ f.sheetTileIsApple }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:42px;height:42px;border-radius:9px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;flex:none;">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"></path></svg>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ f.isGoogleSheet }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:42px;height:42px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 .5px rgba(0,0,0,.08);">
+                      <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.32z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"></path></svg>
+                    </div>
+                  </sc-if>
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:16px;font-weight:600;color:#0A0A0A;">{{ f.faceTitle }}</div>
+                    <div style="font-size:13px;color:#6B6B70;">{{ f.sheetDetail }}</div>
+                  </div>
+                </div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetIsScanError }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff;border-radius:16px;padding:22px 16px;display:flex;flex-direction:column;align-items:center;margin-bottom:12px;box-shadow:0 0 0 .5px rgba(0,0,0,.06);">
+                    <div style="width:76px;height:76px;border-radius:38px;background:rgba(229,57,53,.1);display:flex;align-items:center;justify-content:center;">
+                      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" stroke="#E53935" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V14a4 4 0 014-4h8M54 22V14a4 4 0 00-4-4h-8M10 42v8a4 4 0 004 4h8M54 42v8a4 4 0 01-4 4h-8"></path><line x1="23" y1="28" x2="23" y2="32"></line><line x1="41" y1="28" x2="41" y2="32"></line><path d="M32 26v12l-3 3"></path><path d="M23 44c2 2.5 5 4 9 4s7-1.5 9-4"></path></svg>
+                    </div>
+                    <div style="font-size:15px;font-weight:500;color:#E53935;margin-top:14px;">Лицо не распознано</div>
+                    <div style="font-size:13px;color:#6B6B70;margin-top:2px;">Попробуйте ещё раз</div>
+                  </div>
+                  <div style="display:flex;gap:8px;">
+                    <div onClick="{{ f.onScanFace }}" style="flex:1;height:44px;border-radius:14px;background:#1976FF;display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="font-size:15px;font-weight:600;color:#fff;">Повторить</span></div>
+                    <div onClick="{{ f.onFaceIdCancel }}" style="flex:1;height:44px;border-radius:14px;background:#E5E5EA;display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="font-size:15px;font-weight:500;color:#0A0A0A;">Ввести пароль</span></div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetIsScan }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff;border-radius:16px;padding:22px 16px;display:flex;flex-direction:column;align-items:center;margin-bottom:12px;box-shadow:0 0 0 .5px rgba(0,0,0,.06);">
+                    <div style="position:relative;width:76px;height:76px;border-radius:38px;background:#F2F2F7;display:flex;align-items:center;justify-content:center;">
+                      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" stroke="#1976FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V14a4 4 0 014-4h8M54 22V14a4 4 0 00-4-4h-8M10 42v8a4 4 0 004 4h8M54 42v8a4 4 0 01-4 4h-8"></path><line x1="23" y1="28" x2="23" y2="32"></line><line x1="41" y1="28" x2="41" y2="32"></line><path d="M32 26v12l-3 3"></path><path d="M23 44c2 2.5 5 4 9 4s7-1.5 9-4"></path></svg>
+                      <span style="position:absolute;inset:0;border-radius:38px;border:2px solid #1976FF;pointer-events:none;animation:faceScanRing 2.2s ease-out infinite;"></span>
+                      <span style="position:absolute;inset:0;border-radius:38px;border:2px solid #1976FF;pointer-events:none;animation:faceScanRing 2.2s ease-out infinite .7s;"></span>
+                      <span style="position:absolute;inset:0;border-radius:38px;border:2px solid #1976FF;pointer-events:none;animation:faceScanRing 2.2s ease-out infinite 1.4s;"></span>
+                      <span style="position:absolute;inset:6px;border-radius:32px;box-shadow:0 0 24px rgba(25,118,255,.4);pointer-events:none;animation:faceScanGlow 1.6s ease-in-out infinite;"></span>
+                    </div>
+                    <div style="font-size:15px;font-weight:500;color:#0A0A0A;margin-top:14px;">{{ f.scanTitle }}</div>
+                    <div style="font-size:13px;color:#6B6B70;margin-top:2px;">{{ f.scanSub }}</div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetIsCreating }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff;border-radius:14px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;margin-bottom:12px;box-shadow:0 0 0 .5px rgba(0,0,0,.06);">
+                    <div style="position:relative;width:76px;height:76px;border-radius:38px;background:rgba(25,118,255,.06);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:keyForge 1.8s ease-in-out infinite;">
+                      <svg width="48" height="48" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="5"></rect><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path><circle cx="44" cy="54" r="4.5" fill="#1976FF"></circle><path d="M44 58.5v7" stroke="#1976FF" stroke-width="5" stroke-linecap="round"></path></svg>
+                      <span style="position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,transparent,rgba(25,118,255,.2),transparent);animation:keyForgeShine 1.8s ease-in-out infinite;"></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;margin-top:18px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" style="animation:spin .9s linear infinite;"><circle cx="12" cy="12" r="9" fill="none" stroke="#1976FF" stroke-opacity="0.25" stroke-width="2.6"></circle><path d="M21 12a9 9 0 00-9-9" fill="none" stroke="#1976FF" stroke-width="2.6" stroke-linecap="round"></path></svg>
+                      <span style="font-size:15px;font-weight:500;color:#0A0A0A;">Создаём passkey…</span>
+                    </div>
+                    <div style="font-size:13px;color:#6B6B70;margin-top:4px;">Это займёт пару секунд</div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetIsCompact }}" hint-placeholder-val="{{ true }}">
+                <div style="background:#fff;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:12px;box-shadow:0 0 0 .5px rgba(0,0,0,.06);">
+                  <sc-if value="{{ f.notGoogleSheet }}" hint-placeholder-val="{{ true }}">
+                    <div style="position:relative;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex:none;">
+                      <svg width="36" height="36" viewBox="0 0 64 64" fill="none" stroke="#1976FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V14a4 4 0 014-4h8M54 22V14a4 4 0 00-4-4h-8M10 42v8a4 4 0 004 4h8M54 42v8a4 4 0 01-4 4h-8"></path><line x1="23" y1="28" x2="23" y2="32"></line><line x1="41" y1="28" x2="41" y2="32"></line><path d="M32 26v12l-3 3"></path><path d="M23 44c2 2.5 5 4 9 4s7-1.5 9-4"></path></svg>
+                      <span style="position:absolute;inset:-2px;border-radius:22px;border:2px solid #1976FF;pointer-events:none;animation:faceScanRing 2.2s ease-out infinite;"></span>
+                      <span style="position:absolute;inset:-2px;border-radius:22px;border:2px solid #1976FF;pointer-events:none;animation:faceScanRing 2.2s ease-out infinite .8s;"></span>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ f.isGoogleSheet }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:36px;height:36px;border-radius:18px;background:linear-gradient(135deg,#FF6B5C,#FF9F0A);display:flex;align-items:center;justify-content:center;flex:none;"><span style="font-size:16px;font-weight:700;color:#fff;">A</span></div>
+                  </sc-if>
+                  <div style="flex:1;">
+                    <div style="font-size:15px;font-weight:500;color:#0A0A0A;">{{ f.faceCardTitle }}</div>
+                    <div style="font-size:13px;color:#6B6B70;margin-top:1px;">{{ f.faceCardSub }}</div>
+                  </div>
+                  <sc-if value="{{ f.isGoogleSheet }}" hint-placeholder-val="{{ false }}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </sc-if>
+                </div>
+                </sc-if>
+
+                <sc-if value="{{ f.sheetHasConfirm }}" hint-placeholder-val="{{ true }}">
+                  <div onClick="{{ f.onFaceIdConfirm }}" style="height:50px;border-radius:14px;background:#0A0A0A;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:8px;">
+                    <span style="font-size:16px;font-weight:600;color:#fff;">Продолжить</span>
+                  </div>
+                </sc-if>
+                <div onClick="{{ f.onFaceIdCancel }}" style="height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><span style="font-size:16px;font-weight:500;color:#1976FF;">Отмена</span></div>
+              </div>
+            </div>
+          </sc-if>
+
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:70;height:34px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:8px;pointer-events:none;">
+            <div style="width:139px;height:5px;border-radius:100px;background:rgba(0,0,0,.25);"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:22px;height:22px;border-radius:11px;background:rgba(15,39,80,.08);display:flex;align-items:center;justify-content:center;"><span style="font-size:11.5px;font-weight:700;color:#6B6B70;">{{ f.n }}</span></div>
+          <span style="font-size:14px;font-weight:600;color:#3C3C43;">{{ f.label }}</span>
+        </div>
+      </div>
+    </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ false }}">
+      <div style="width:250px;display:flex;flex-direction:column;gap:10px;padding-top:6px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#8E8E93;">Шаги флоу</div>
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="6">
+          <div onClick="{{ s.onGo }}" style="display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:14px;background:{{ s.bg }};box-shadow:{{ s.shadow }};cursor:pointer;transition:background .18s;">
+            <div style="width:22px;height:22px;border-radius:11px;background:{{ s.dotBg }};display:flex;align-items:center;justify-content:center;flex:none;"><span style="font-size:11.5px;font-weight:700;color:{{ s.dotColor }};">{{ s.n }}</span></div>
+            <span style="flex:1;font-size:14.5px;font-weight:{{ s.weight }};color:{{ s.color }};">{{ s.label }}</span>
+          </div>
+        </sc-for>
+        <div onClick="{{ onReset }}" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;height:42px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px rgba(15,39,80,.08);cursor:pointer;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B6B70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"></path><path d="M3 3.5V9h5.5"></path></svg>
+          <span style="font-size:14px;font-weight:600;color:#6B6B70;">Сбросить прототип</span>
+        </div>
+        <p style="margin:8px 2px 0;font-size:13px;line-height:1.5;color:#8E8E93;">Неверный код тоже работает: введи любой шестизначный, кроме {{ smsCode }} — увидишь состояние ошибки.</p>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1720,&quot;height&quot;:1000}}">
+const COUNTRY_DATA = [
+  { code: 'AM', name: 'Армения', dial: '+374', flag: ['#D90012', '#0033A0', '#F2A800'] },
+  { code: 'AU', name: 'Австралия', dial: '+61', flag: ['#012169', '#fff', '#C8102E'] },
+  { code: 'AT', name: 'Австрия', dial: '+43', flag: ['#ED2939', '#fff', '#ED2939'] },
+  { code: 'AZ', name: 'Азербайджан', dial: '+994', flag: ['#00B5E2', '#EF3340', '#509E2F'] },
+  { code: 'BY', name: 'Беларусь', dial: '+375', flag: ['#C8313E', '#007C30', '#C8313E'] },
+  { code: 'BE', name: 'Бельгия', dial: '+32', flag: ['#000', '#FDDA24', '#EF3340'] },
+  { code: 'BG', name: 'Болгария', dial: '+359', flag: ['#fff', '#00966E', '#D62612'] },
+  { code: 'BR', name: 'Бразилия', dial: '+55', flag: ['#009C3B', '#FFDF00', '#002776'] },
+  { code: 'GB', name: 'Великобритания', dial: '+44', flag: ['#012169', '#fff', '#C8102E'] },
+  { code: 'HU', name: 'Венгрия', dial: '+36', flag: ['#CE2939', '#fff', '#477050'] },
+  { code: 'DE', name: 'Германия', dial: '+49', flag: ['#000', '#DD0000', '#FFCE00'] },
+  { code: 'GR', name: 'Греция', dial: '+30', flag: ['#0D5EAF', '#fff', '#0D5EAF'] },
+  { code: 'GE', name: 'Грузия', dial: '+995', flag: ['#fff', '#FF0000', '#fff'] },
+  { code: 'DK', name: 'Дания', dial: '+45', flag: ['#C8102E', '#fff', '#C8102E'] },
+  { code: 'IL', name: 'Израиль', dial: '+972', flag: ['#fff', '#0038B8', '#fff'] },
+  { code: 'IN', name: 'Индия', dial: '+91', flag: ['#FF9933', '#fff', '#138808'] },
+  { code: 'ID', name: 'Индонезия', dial: '+62', flag: ['#FF0000', '#FF0000', '#fff'] },
+  { code: 'IE', name: 'Ирландия', dial: '+353', flag: ['#169B62', '#fff', '#FF883E'] },
+  { code: 'ES', name: 'Испания', dial: '+34', flag: ['#AA151B', '#F1BF00', '#AA151B'] },
+  { code: 'IT', name: 'Италия', dial: '+39', flag: ['#008C45', '#fff', '#CD212A'] },
+  { code: 'KZ', name: 'Казахстан', dial: '+7', flag: ['#00AFCA', '#00AFCA', '#FEC50C'] },
+  { code: 'CA', name: 'Канада', dial: '+1', flag: ['#FF0000', '#fff', '#FF0000'] },
+  { code: 'CN', name: 'Китай', dial: '+86', flag: ['#DE2910', '#DE2910', '#DE2910'] },
+  { code: 'KG', name: 'Кыргызстан', dial: '+996', flag: ['#E8112D', '#FFDF00', '#E8112D'] },
+  { code: 'LV', name: 'Латвия', dial: '+371', flag: ['#9E3039', '#fff', '#9E3039'] },
+  { code: 'LT', name: 'Литва', dial: '+370', flag: ['#FDB913', '#006A44', '#C1272D'] },
+  { code: 'MD', name: 'Молдова', dial: '+373', flag: ['#0046AE', '#FFD200', '#CC092F'] },
+  { code: 'NL', name: 'Нидерланды', dial: '+31', flag: ['#AE1C28', '#fff', '#21468B'] },
+  { code: 'NO', name: 'Норвегия', dial: '+47', flag: ['#EF2B2D', '#002868', '#EF2B2D'] },
+  { code: 'PL', name: 'Польша', dial: '+48', flag: ['#fff', '#fff', '#DC143C'] },
+  { code: 'PT', name: 'Португалия', dial: '+351', flag: ['#006600', '#FF0000', '#FF0000'] },
+  { code: 'RU', name: 'Россия', dial: '+7', flag: ['#fff', '#0039A6', '#D52B1E'] },
+  { code: 'US', name: 'США', dial: '+1', flag: ['#B22234', '#fff', '#3C3B6E'] },
+  { code: 'TJ', name: 'Таджикистан', dial: '+992', flag: ['#CC0000', '#fff', '#006600'] },
+  { code: 'TM', name: 'Туркменистан', dial: '+993', flag: ['#28AE66', '#28AE66', '#28AE66'] },
+  { code: 'TR', name: 'Турция', dial: '+90', flag: ['#E30A17', '#E30A17', '#E30A17'] },
+  { code: 'UZ', name: 'Узбекистан', dial: '+998', flag: ['#0099B5', '#fff', '#1EB53A'] },
+  { code: 'UA', name: 'Украина', dial: '+380', flag: ['#0057B7', '#0057B7', '#FFD700'] },
+];
+const POPULAR = ['RU', 'TR', 'UZ', 'TM', 'BY', 'KZ'];
+const CHANNELS = {
+  RU: ['telegram', 'viber', 'whatsapp'], BY: ['telegram', 'viber', 'whatsapp'], KZ: ['telegram', 'whatsapp'],
+  UZ: ['telegram'], TM: ['telegram'], TJ: ['telegram'], KG: ['telegram'], UA: ['telegram', 'viber'],
+  TR: ['whatsapp'], IN: ['whatsapp'], ID: ['whatsapp'], BR: ['whatsapp'], ES: ['whatsapp'],
+  IT: ['whatsapp'], NL: ['whatsapp'], DE: ['whatsapp', 'sms'], IL: ['whatsapp'], PT: ['whatsapp'],
+};
+const CH_META = {
+  sms: { label: 'Получить код в SMS', color: '#1976FF' },
+  telegram: { label: 'Отправить в Telegram', color: '#229ED9' },
+  whatsapp: { label: 'Отправить в WhatsApp', color: '#25D366' },
+  viber: { label: 'Отправить в Viber', color: '#7360F2' },
+};
+const CH_ICON = {
+  sms: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v7a2.5 2.5 0 01-2.5 2.5H9l-5 4V6.5z"/></svg>',
+  telegram: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M21.6 4.3L2.9 11.5c-.9.35-.86 1.65.06 1.95l4.55 1.5 1.72 5.2c.23.7 1.12.9 1.63.36l2.5-2.6 4.6 3.4c.62.46 1.5.12 1.66-.63l3.2-15c.16-.77-.6-1.4-1.32-1.13zM8.9 14.2l9.1-5.6-7.4 6.9-.35 3.1-1.35-4.4z"/></svg>',
+  whatsapp: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.5A9.4 9.4 0 003.6 16.6L2.5 21.5l5-1.3A9.4 9.4 0 1012 2.5zm0 1.9a7.5 7.5 0 016.4 11.5l-.3.5.6 2.3-2.4-.6-.5.3A7.5 7.5 0 1112 4.4zm-3.3 3.8c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.8-2c-.2-.5-.4-.5-.6-.5h-.4z"/></svg>',
+  viber: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C7.3 2 3.5 4.6 3.5 9.6c0 2.7 1.1 4.7 3 6v3.6c0 .6.7.9 1.1.5l2-2c.8.2 1.6.3 2.4.3 4.7 0 8.5-2.6 8.5-7.6S16.7 2 12 2zm-2.8 4.3c.2 0 .4.1.5.3l.9 1.5c.1.2.1.5-.1.7l-.5.5c-.1.1-.2.3-.1.4.2.5.6 1.1 1.2 1.6.6.5 1.2.8 1.7.9.2 0 .3-.1.4-.2l.4-.5c.2-.2.4-.2.6-.1l1.5.8c.2.1.3.4.3.6-.1.6-.4 1.1-1 1.4-.5.2-1 .2-1.5.1-1.6-.4-3-1.3-4.1-2.5-.9-1-1.4-2-1.6-3-.1-.6 0-1.2.4-1.7.2-.4.5-.6.9-.8zM13 6.6c1.9.2 3.3 1.6 3.5 3.5 0 .2-.1.4-.4.4-.2 0-.4-.1-.4-.4-.2-1.5-1.2-2.5-2.7-2.7-.2 0-.4-.2-.4-.4 0-.3.2-.4.4-.4zm0 1.7c1 .1 1.7.9 1.8 1.9 0 .2-.1.4-.4.4-.2 0-.4-.2-.4-.4-.1-.6-.5-1-1.1-1.1-.2 0-.4-.2-.4-.4 0-.3.2-.4.5-.4z"/></svg>',
+};
+const flagOf = code => code.replace(/./g, ch => String.fromCodePoint(0x1F1E6 + ch.charCodeAt(0) - 65));
+const COUNTRIES = COUNTRY_DATA.map(c => Object.assign({}, c, { flag: flagOf(c.code) }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+
+const SMS = '472918';
+const PAD_SUB = { '2': 'ABC', '3': 'DEF', '4': 'GHI', '5': 'JKL', '6': 'MNO', '7': 'PQRS', '8': 'TUV', '9': 'WXYZ' };
+const LETTERS = ['йцукенгшщзх'.split(''), 'фывапролдж'.split('')];
+const BOTTOM = 'ячсмитьбю'.split('');
+const NAME_HINTS = ['Александр', 'Саша', 'Alex'];
+const GOOGLE_BENEFITS = [
+  ['Вход через Google', 'Аккаунт уже на устройстве — без пароля'],
+  ['Подтверждение Google', 'Двухфакторка вашего аккаунта работает и здесь'],
+  ['Синхронизация', 'Один вход на телефоне и в вебе'],
+];
+const APPLE_BENEFITS = [
+  ['Вход через Apple ID', 'Без пароля и SMS-кодов'],
+  ['E-mail можно скрыть', 'Apple подставит уникальный адрес'],
+  ['Работает на всех устройствах', 'iPhone, iPad и Mac с вашим Apple ID'],
+];
+const BENEFITS = [
+  ['Без паролей', 'Вход одним прикосновением'],
+  ['Защищено устройством', 'Биометрия не покидает iPhone'],
+  ['Синхронизация с iCloud', 'Доступ со всех ваших устройств'],
+];
+const STEPS = [
+  { id: 'phone', label: 'Номер телефона' },
+  { id: 'country', label: 'Выбор страны' },
+  { id: 'confirm', label: 'Подтверждение номера' },
+  { id: 'method', label: 'Способ входа' },
+  { id: 'otp', label: 'Код из SMS' },
+  { id: 'return', label: 'Повторный вход' },
+  { id: 'speedup', label: 'Включить passkey' },
+  { id: 'passkey', label: 'Passkey · создание' },
+  { id: 'pk-signin', label: 'Passkey · вход' },
+  { id: 'pk-qr', label: 'Другое устройство' },
+  { id: 'locked', label: 'Блокировка ввода' },
+  { id: 'apple', label: 'Apple ID' },
+  { id: 'restore-choice', label: 'Восстановление' },
+  { id: 'blocked', label: 'Аккаунт заблокирован' },
+  { id: 'profile', label: 'Профиль' },
+  { id: 'done', label: 'Готово' },
+];
+const ALL = [
+  { stage: 'phone', label: 'Номер телефона', noPad: true },
+  { stage: 'phone', label: 'Номер телефона · CTA Telegram', noPad: true, cta: 'telegram' },
+  { stage: 'phone', label: 'Номер телефона · CTA WhatsApp', noPad: true, cta: 'whatsapp' },
+  { stage: 'phone', label: 'Ввод номера · клавиатура', typing: true },
+  { stage: 'confirm', label: 'Подтверждение номера', noPad: true },
+  { stage: 'method', label: 'Выбор способа входа · два мессенджера' },
+  { stage: 'country', label: 'Выбор страны' },
+  { stage: 'otp', label: 'Код из SMS · ожидание', otp: '', timer: 32, noPad: true, country: 'US', channel: 'sms' },
+  { stage: 'otp', label: 'AutoFill из SMS', otp: '', autofill: true, country: 'US', channel: 'sms' },
+  { stage: 'otp', label: 'Код в Telegram', otp: '', timer: 28, noPad: true, channel: 'telegram' },
+  { stage: 'otp', label: 'Код введён · проверяем', otp: SMS, verifying: true },
+  { stage: 'otp', label: 'Неверный код', otp: '', otpError: true },
+  { stage: 'otp', label: 'Таймер истёк', otp: '', timer: 0 },
+  { stage: 'locked', label: 'Слишком много попыток' },
+  { stage: 'success', label: 'Номер подтверждён' },
+  { stage: 'passkey', label: 'Passkey · предложение' },
+  { stage: 'passkey', label: 'Подключение Apple ID', variant: 'apple' },
+  { stage: 'passkey', label: 'Подключение Google', variant: 'google' },
+  { stage: 'success', label: 'Apple ID подключён', successKind: 'appleLinked' },
+  { stage: 'success', label: 'Google подключён', successKind: 'googleLinked' },
+  { stage: 'success', label: 'Passkey создан', successKind: 'passkey' },
+  { stage: 'profile', label: 'Профиль · пустой', name: '', avatar: false },
+  { stage: 'profile', label: 'Выбор аватара · шит', name: '', avatar: false, avatarSheet: true, avatarPick: 4 },
+  { stage: 'profile', label: 'Профиль · заполнен', name: 'Александр', avatar: true, avatarPick: 4 },
+  { stage: 'restore-choice', label: 'Восстановление · источник' },
+  { stage: 'restore-found', label: 'Найдена копия' },
+  { stage: 'restore-progress', label: 'Восстановление · прогресс' },
+  { stage: 'success', label: 'Чаты восстановлены', successKind: 'restore' },
+  { stage: 'blocked', label: 'Аккаунт заблокирован' },
+  { stage: 'appeal', label: 'Форма обжалования' },
+  { stage: 'appeal-sent', label: 'Обращение отправлено' },
+];
+const GROUPS = [
+  { key: 'phone', title: 'Вход по номеру', sub: 'Ввод номера и нативный выбор страны' },
+  { key: 'otp', title: 'Код из SMS', sub: 'Ожидание, AutoFill, проверка, ошибки, блокировка ввода' },
+  { key: 'return', title: 'Повторный вход', sub: 'Аккаунт уже связан с Apple, Google или passkey' },
+  { key: 'passkey', title: 'Passkey', sub: 'Создание, системные шиты, вход по Face ID, QR с другого устройства' },
+  { key: 'social', title: 'Google и Apple', sub: 'Вход через сторонний аккаунт' },
+  { key: 'profile', title: 'Профиль', sub: 'Имя и фото после подтверждения номера' },
+  { key: 'restore', title: 'Восстановление', sub: 'История сообщений с Link Cloud' },
+  { key: 'blocked', title: 'Блокировка и обжалование', sub: 'Ограничение входа и обращение к модератору' },
+  { key: 'done', title: 'Финал', sub: 'Аккаунт готов' },
+];
+const groupOf = spec => {
+  const s = spec.stage, m = spec.sheetMode;
+  if (m === 'google' || m === 'apple' || s === 'apple' || s === 'apple-link') return 'social';
+  if (s === 'phone' || s === 'country' || s === 'method' || s === 'confirm') return 'phone';
+  if (s === 'otp' || s === 'locked') return 'otp';
+  if (s === 'return' || s === 'speedup') return 'return';
+  if (s === 'success') return spec.successKind === 'passkey' || spec.successKind === 'appleLinked' || spec.successKind === 'googleLinked' ? 'passkey' : spec.successKind === 'restore' ? 'restore' : 'otp';
+  if (s === 'passkey' || s === 'pk-signin' || s === 'pk-qr' || s === 'pk-exists' || s === 'pk-backup') return 'passkey';
+  if (s === 'profile') return 'profile';
+  if (s.indexOf('restore') === 0) return 'restore';
+  if (s === 'blocked' || s === 'appeal' || s === 'appeal-sent') return 'blocked';
+  return 'done';
+};
+const BACKUP_ROWS = [['Размер', '4,2 ГБ'], ['Дата', 'Сегодня, 03:21'], ['Сообщения', '12 487 чатов'], ['Медиа', '8 920 фото и видео']];
+const SUCCESS_COPY = {
+  otp: ['Номер подтверждён', '', null],
+  passkey: ['Passkey создан', 'Теперь вы будете заходить в Link одним прикосновением.', 'Синхронизировано с iCloud Keychain'],
+  appleLinked: ['Apple ID подключён', 'Теперь вход в Link — одним касанием через Apple.', 'sasha@icloud.com'],
+  googleLinked: ['Google подключён', 'Теперь вход в Link — одним касанием через Google.', 'alexey.sokolov@gmail.com'],
+  apple: ['Apple ID подключён', 'sasha@icloud.com теперь связан с вашим аккаунтом Link.', null],
+  restore: ['Чаты восстановлены', '12 487 чатов и 8 920 файлов готовы.', 'Link Cloud · резервные копии включены'],
+};
+const PK_ACCOUNTS = [
+  { name: 'Александр Соколов', handle: '+7 912 345 67 89', initial: 'А', tint: '#FF6B5C', primary: true },
+  { name: 'Дарья Петрова', handle: '+7 495 123 45 67', initial: 'Д', tint: '#7B61FF', primary: false },
+];
+const DEVICES = [['iPhone 15 Pro', 'это устройство'], ['iPad Pro', 'синхронизация активна'], ['MacBook Pro', 'синхронизация активна']];
+const QR_STEPS = [['Откройте Link', 'на телефоне с passkey'], ['Сканируйте QR', 'через камеру или меню «Войти»']];
+const QR = (() => {
+  const n = 21, cells = [];
+  let seed = 7;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      const finder = (fx, fy) => x >= fx && x < fx + 7 && y >= fy && y < fy + 7 &&
+        (x === fx || x === fx + 6 || y === fy || y === fy + 6 || (x >= fx + 2 && x <= fx + 4 && y >= fy + 2 && y <= fy + 4));
+      const inFinderBox = (fx, fy) => x >= fx && x < fx + 8 && y >= fy && y < fy + 8;
+      const isFinder = finder(0, 0) || finder(n - 7, 0) || finder(0, n - 7);
+      const reserved = inFinderBox(0, 0) || inFinderBox(n - 8, 0) || inFinderBox(0, n - 8);
+      cells.push({ bg: isFinder || (!reserved && rnd() > 0.52) ? '#0A0A0A' : 'transparent' });
+    }
+  }
+  return cells;
+})();
+
+class Component extends DCLogic {
+  state = { mode: 'all', pad: false, stage: 'phone', country: 'RU', channel: 'telegram', digits: '9123456789', otp: '', otpError: false, verifying: false, sending: false, timer: 32, sheet: false, sheetMode: 'signin', name: '', avatar: false, doneVia: 'sms', shift: false };
+
+  componentDidMount() {
+    this._t = setInterval(() => {
+      if (this.state.mode === 'single' && this.state.stage === 'otp' && this.state.timer > 0) this.setState(s => ({ timer: s.timer - 1 }));
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this._t); clearTimeout(this._d); }
+
+  later(fn, ms) { clearTimeout(this._d); this._d = setTimeout(fn, ms); }
+
+  go(stage) {
+    const fresh = stage === 'otp' ? { otp: '', otpError: false, verifying: false, timer: 32 } : {};
+    this.setState(Object.assign({ stage: stage, sheet: false, sending: false }, fresh));
+  }
+
+  type(ch) {
+    this.setState(s => {
+      const up = s.shift || !s.name;
+      return { name: s.name + (up ? ch.toUpperCase() : ch), shift: false };
+    });
+  }
+
+  fmt(d) {
+    return [d.slice(0, 3), d.slice(3, 6), d.slice(6, 8), d.slice(8, 10)].filter(Boolean).join(' ');
+  }
+
+  pushDigit(n, live) {
+    const st = this.state;
+    if (st.stage === 'phone' || !live) {
+      if (st.digits.length < 10 && st.stage === 'phone') this.setState(s => ({ digits: s.digits + n }));
+      if (!live) return;
+    }
+    if (live && st.stage === 'otp' && !st.verifying) {
+      if (st.otp.length >= 6) return;
+      const next = st.otp + n;
+      this.setState({ otp: next, otpError: false });
+      if (next.length === 6) this.later(() => this.verify(next), 260);
+    }
+  }
+
+  delDigit() {
+    const st = this.state;
+    if (st.stage === 'phone') this.setState(s => ({ digits: s.digits.slice(0, -1) }));
+    else if (st.stage === 'otp') this.setState(s => ({ otp: s.otp.slice(0, -1), otpError: false }));
+  }
+
+  verify(code) {
+    const c = code || this.state.otp;
+    if (c.length < 6) return;
+    this.setState({ verifying: true, otpError: false });
+    this.later(() => {
+      if (c === SMS) this.setState({ verifying: false, stage: 'return' });
+      else this.setState({ verifying: false, otpError: true, otp: '' });
+    }, 900);
+  }
+
+  frame(spec, n, live) {
+    const html = s => React.createElement('span', { style: { display: 'flex' }, dangerouslySetInnerHTML: { __html: s } });
+    const st = this.state;
+    const noop = () => {};
+    const stage = spec.stage;
+    const otp = spec.otp !== undefined ? spec.otp : (live ? st.otp : '');
+    const otpError = spec.otpError !== undefined ? spec.otpError : (live ? st.otpError : false);
+    const verifying = spec.verifying !== undefined ? spec.verifying : (live ? st.verifying : false);
+    const timer = spec.timer !== undefined ? spec.timer : (live ? st.timer : 32);
+    const sheet = spec.sheet !== undefined ? spec.sheet : (live ? st.sheet : false);
+    const sheetMode = spec.sheetMode || (live ? st.sheetMode : 'signin');
+    const name = spec.name !== undefined ? spec.name : (live ? st.name : '');
+    const avatar = spec.avatar !== undefined ? spec.avatar : (live ? st.avatar : false);
+    const code = spec.country || st.country;
+    const c = COUNTRIES.find(x => x.code === code) || COUNTRIES[0];
+    const chList = CHANNELS[code] || ['sms'];
+    const ch = spec.channel || (live && chList.indexOf(st.channel) >= 0 ? st.channel : chList[0]);
+    const isSms = ch === 'sms';
+    const chName = { telegram: 'Telegram', whatsapp: 'WhatsApp', viber: 'Viber' }[ch] || 'SMS';
+    const phoneReady = st.digits.length === 10;
+    const otpReady = otp.length === 6;
+    const grad = '#1976FF';
+    const gradShadow = 'none';
+    const mm = Math.floor(timer / 60), ss = String(timer % 60).padStart(2, '0');
+    const fullPhone = c.dial + ' ' + this.fmt(st.digits || '9123456789');
+    const isGoogle = sheetMode === 'google';
+
+    const groups = [{
+      letter: 'Часто используемые',
+      items: POPULAR.map(code => COUNTRIES.find(x => x.code === code)).filter(Boolean),
+    }];
+    COUNTRIES.forEach(x => {
+      const L = x.name[0];
+      let g = groups.find(y => y.letter === L);
+      if (!g) { g = { letter: L, items: [] }; groups.push(g); }
+      g.items.push(x);
+    });
+
+    return {
+      n: String(n),
+      label: spec.label,
+
+      isPhone: stage === 'phone' || stage === 'country' || stage === 'method' || stage === 'confirm',
+      showConfirmAlert: stage === 'confirm',
+      onConfirmNumber: live ? () => this.go('method') : noop,
+      onEditNumber: live ? () => this.setState({ stage: 'phone', pad: true }) : noop,
+      showMethodSheet: stage === 'method',
+      otpChannels: chList.map(id => {
+        const meta = CH_META[id] || CH_META.sms;
+        return {
+          label: meta.label,
+          bg: meta.color,
+          icon: html(CH_ICON[id] || CH_ICON.sms),
+          onTap: live ? () => { this.setState({ channel: id }); this.go('otp'); } : noop,
+        };
+      }),
+      otpTitle: isSms ? 'Введите код' : 'Код в ' + chName,
+      otpSentPrefix: isSms ? 'SMS отправлено на ' : 'Код отправлен в ' + chName + ' на ',
+      otpResendLabel: isSms ? 'Отправить код снова через ' : 'Отправить код заново через ',
+      phoneHint: chList.indexOf('sms') >= 0
+        ? 'На этот номер придёт SMS с кодом. Тарифы оператора могут применяться.'
+        : 'Код подтверждения придёт в мессенджер на этот номер.',
+      noSmsInCountry: chList.indexOf('sms') < 0,
+      channelHint: 'В стране «' + c.name + '» SMS-коды не доставляются — код придёт в мессенджер.',
+      onSms: live ? () => this.go('otp') : noop,
+      showCountrySheet: stage === 'country',
+      isOtp: stage === 'otp',
+      isPasskey: stage === 'passkey',
+      isProfile: stage === 'profile',
+      isDone: stage === 'done',
+      isSuccess: stage === 'success' || stage === 'speedup',
+      isReturn: stage === 'return',
+      showSpeedupSheet: stage === 'speedup',
+      onEnablePasskey: live ? () => this.setState({ stage: 'passkey', sheet: false }) : noop,
+      onContinueWithSms: live ? () => this.setState({ stage: 'speedup', sheet: false }) : noop,
+      onSkipSpeedup: live ? () => this.setState({ stage: 'profile', sheet: false }) : noop,
+      linkedMethods: [
+        { title: 'Passkey', sub: 'iPhone 15 Pro · Face ID', fast: true, tileBg: 'rgba(25,118,255,.1)', icon: html('<svg width="18" height="18" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="7"/><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="7" stroke-linecap="round"/><circle cx="44" cy="54" r="4.5" fill="#1976FF"/><path d="M44 58.5v7" stroke="#1976FF" stroke-width="7" stroke-linecap="round"/></svg>'), onTap: live ? () => this.setState({ sheet: true, sheetMode: 'scan' }) : noop },
+        { title: 'Apple ID', sub: 'sasha@icloud.com', fast: false, tileBg: '#0A0A0A', icon: html('<svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"/></svg>'), onTap: live ? () => this.setState({ sheet: true, sheetMode: 'apple' }) : noop },
+        { title: 'Google', sub: 'alexey.sokolov@gmail.com', fast: false, tileBg: '#fff', icon: html('<svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.32z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>'), onTap: live ? () => this.setState({ sheet: true, sheetMode: 'google' }) : noop },
+      ].map((m, i, a) => Object.assign({}, m, { divider: i < a.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none' })),
+      isLocked: stage === 'locked',
+      isPkSignIn: stage === 'pk-signin',
+      isPkExists: stage === 'pk-exists',
+      isPkBackup: stage === 'pk-backup',
+      isPkQr: stage === 'pk-qr',
+      isApple: stage === 'apple',
+      isAppleLink: stage === 'apple-link',
+      isRestoreChoice: stage === 'restore-choice',
+      isRestoreFound: stage === 'restore-found',
+      isRestoreProgress: stage === 'restore-progress',
+      isBlocked: stage === 'blocked',
+      isAppeal: stage === 'appeal',
+      isAppealSent: stage === 'appeal-sent',
+      successTitle: (SUCCESS_COPY[spec.successKind] || SUCCESS_COPY.otp)[0],
+      successSub: (SUCCESS_COPY[spec.successKind] || SUCCESS_COPY.otp)[1],
+      successHasSub: !!(SUCCESS_COPY[spec.successKind] || SUCCESS_COPY.otp)[1],
+      successHasChip: !!(SUCCESS_COPY[spec.successKind] || SUCCESS_COPY.otp)[2],
+      successChipText: (SUCCESS_COPY[spec.successKind] || SUCCESS_COPY.otp)[2] || '',
+      successChipHasCheck: ['googleLinked','appleLinked','apple','google'].indexOf(spec.successKind) >= 0,
+      successChipCheckColor: spec.successKind === 'appleLinked' || spec.successKind === 'apple' ? '#0A0A0A' : '#34A853',
+      successChipBg: ['googleLinked','appleLinked','apple','google'].indexOf(spec.successKind) >= 0 ? 'rgba(15,39,80,.05)' : 'rgba(25,118,255,.06)',
+      successChipColor: ['googleLinked','appleLinked','apple','google'].indexOf(spec.successKind) >= 0 ? '#3C3C43' : '#1976FF',
+      successChipIcon: html(
+        spec.successKind === 'googleLinked' || spec.successKind === 'google'
+          ? '<svg width="15" height="15" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.32z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>'
+          : spec.successKind === 'appleLinked' || spec.successKind === 'apple'
+            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"/></svg>'
+            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M12 8v4"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'),
+      successHasPairedHero: spec.successKind === 'apple',
+      backupRows: BACKUP_ROWS.map((r, i) => ({
+        k: r[0], v: r[1],
+        divider: i < BACKUP_ROWS.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+      })),
+      restoreOptions: [
+        { title: 'Link Cloud', sub: 'Резервная копия в облаке · 4,2 ГБ', meta: 'сегодня в 03:21', recommended: true, icon: html('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 15.5a3 3 0 01-3 3h-11a4 4 0 01-.8-7.9A5 5 0 0115 8.6a3.5 3.5 0 015.5 2.9 3 3 0 010 4z"/></svg>') },
+        { title: 'Этот телефон', sub: 'Локальная копия · 3,8 ГБ', meta: 'вчера в 22:14', recommended: false, icon: html('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>') },
+        { title: 'Перенос с другого телефона', sub: 'Перенесите чаты через QR-код', meta: '', recommended: false, icon: html('<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12l-3-3M20 16H8l3 3"/></svg>') },
+      ].map(o => Object.assign({}, o, {
+        bg: o.recommended ? 'linear-gradient(180deg,rgba(30,125,255,.06),rgba(255,255,255,.7))' : 'rgba(255,255,255,.7)',
+        shadow: o.recommended
+          ? '0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1.5px #1976FF,0 10px 28px rgba(30,125,255,.18)'
+          : '0 1px 0 rgba(255,255,255,.7) inset,0 0 0 .5px rgba(0,0,0,.06),0 10px 28px rgba(15,39,80,.06)',
+        onPick: live ? () => this.setState({ stage: 'restore-found' }) : noop,
+      })),
+      streamIcons: [
+        ['#1976FF', 'M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z', '0s'],
+        ['#34C759', 'M3 5h18v14H3zM3.6 16.5l4.6-4.6 3.3 3.3 3-3 6 6', '.65s'],
+        ['#FF9F0A', 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6', '1.3s'],
+        ['#FF6B5C', 'M23 7l-7 5 7 5V7zM1 5h15v14H1z', '1.95s'],
+      ].map(s => ({
+        delay: s[2],
+        icon: html('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="' + s[0] + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="' + s[1] + '"/></svg>'),
+      })),
+      onRestore: live ? () => this.setState({ stage: 'restore-progress' }) : noop,
+      onAppeal: live ? () => this.setState({ stage: 'appeal' }) : noop,
+      onBackBlocked: live ? () => this.setState({ stage: 'blocked' }) : noop,
+      onAppealSend: live ? () => this.setState({ stage: 'appeal-sent' }) : noop,
+      onAppleConfirm: live ? () => this.setState({ sheet: true, sheetMode: 'apple' }) : noop,
+      pkAccounts: PK_ACCOUNTS.map((a, i) => Object.assign({}, a, {
+        divider: i < PK_ACCOUNTS.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+        onPick: live ? () => this.setState({ sheet: true, sheetMode: 'scan' }) : noop,
+      })),
+      devices: DEVICES.map((d, i) => ({
+        name: d[0], status: d[1],
+        divider: i < DEVICES.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+      })),
+      qrCells: QR,
+      qrSteps: QR_STEPS.map((s, i) => ({
+        n: String(i + 1), title: s[0], sub: s[1],
+        divider: i < QR_STEPS.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+      })),
+      onScanFace: live ? () => this.setState({ sheet: true, sheetMode: 'scan' }) : noop,
+      showAutofillStrip: isSms && (!!spec.autofill || (live && stage === 'otp' && otp.length === 0 && !otpError)),
+
+      countryName: c.name,
+      countryDial: c.dial,
+      countryFlag: c.flag,
+      phoneText: st.digits ? this.fmt(st.digits) : '000 000 00 00',
+      phoneColor: st.digits ? '#0A0A0A' : '#C7C7CC',
+      fullPhone: fullPhone,
+
+      phoneCtaBg: spec.cta ? CH_META[spec.cta].color : st.sending || phoneReady ? grad : '#F2F2F7',
+      phoneCtaShadow: st.sending || phoneReady ? gradShadow : '0 0 0 1px rgba(15,39,80,.08)',
+      phoneCtaColor: spec.cta || st.sending || phoneReady ? '#fff' : '#A6ACBA',
+      phoneCtaCursor: phoneReady ? 'pointer' : 'not-allowed',
+      phoneCtaLabel: st.sending && live ? 'Отправляем…' : spec.cta ? CH_META[spec.cta].label : 'Далее',
+      phoneCtaHasIcon: !!spec.cta && !(st.sending && live),
+      phoneCtaIcon: html(CH_ICON[spec.cta] || CH_ICON.sms),
+      sendingSms: live && st.sending,
+      onSubmitPhone: live ? () => {
+        if (!phoneReady || st.sending) return;
+        this.setState({ sending: true });
+        this.later(() => this.go('confirm'), 800);
+      } : noop,
+      onOpenCountry: live ? () => this.setState({ stage: 'country' }) : noop,
+      onBackToPhone: live ? () => this.go('phone') : noop,
+      onApple: live ? () => this.setState({ sheet: true, sheetMode: 'apple' }) : noop,
+      onGoogle: live ? () => this.setState({ sheet: true, sheetMode: 'google' }) : noop,
+      onPasskey: live ? () => this.setState({ stage: 'passkey' }) : noop,
+
+      alphaIndex: groups.filter(g => g.letter.length === 1).map(g => ({ letter: g.letter })),
+      countryGroups: groups.map(g => ({
+        letter: g.letter,
+        items: g.items.map((x, i) => ({
+          name: x.name, dial: x.dial, flag: x.flag,
+          selected: x.code === st.country,
+          rowBg: x.code === st.country ? 'rgba(30,125,255,.08)' : 'transparent',
+          divider: i < g.items.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+          hairline: i < g.items.length - 1 ? 'rgba(60,60,67,.29)' : 'transparent',
+          onPick: () => this.setState(live ? { country: x.code, stage: 'phone' } : { country: x.code }),
+        })),
+      })),
+
+      otpCells: Array.from({ length: 6 }, (_, i) => {
+        const ch = otp[i];
+        const active = i === otp.length && !otpError && !verifying;
+        return {
+          ch: ch || '',
+          caret: active && !ch,
+          bg: ch ? '#fff' : 'rgba(255,255,255,.7)',
+          color: otpError ? '#E53935' : '#0A0A0A',
+          shadow: otpError
+            ? '0 0 0 2px #E53935,0 1px 0 rgba(255,255,255,.7) inset,0 6px 16px rgba(229,57,53,.12)'
+            : active
+              ? '0 0 0 2px #1976FF,0 1px 0 rgba(255,255,255,.7) inset,0 6px 16px rgba(15,39,80,.06)'
+              : '0 1px 0 rgba(255,255,255,.7) inset,0 0 0 1px rgba(15,39,80,.10),0 6px 16px rgba(15,39,80,.04)',
+        };
+      }),
+      otpShake: otpError ? 'shake .5s cubic-bezier(.36,.07,.19,.97) both' : 'none',
+      otpError: otpError,
+      otpWaiting: !verifying,
+      verifying: verifying,
+      timerRunning: timer > 0,
+      canResend: timer === 0,
+      timerLabel: mm + ':' + ss,
+      onResend: live ? () => this.setState({ timer: 32, otp: '', otpError: false }) : noop,
+      otpCtaGap: spec.noPad ? '40px' : '10px',
+      otpCtaBg: otpReady || verifying ? grad : '#E5E5EA',
+      otpCtaShadow: otpReady || verifying ? gradShadow : 'none',
+      otpCtaColor: otpReady || verifying ? '#fff' : '#8E8E93',
+      otpCtaCursor: otpReady ? 'pointer' : 'not-allowed',
+      otpCtaLabel: verifying ? 'Проверяем…' : 'Подтвердить',
+      onVerify: live ? () => { if (otpReady && !verifying) this.verify(otp); } : noop,
+
+      onCreatePasskey: live ? () => this.setState({ sheet: true, sheetMode: 'create' }) : noop,
+      showFaceId: sheet,
+      isGoogleSheet: isGoogle,
+      notGoogleSheet: !isGoogle,
+      sheetIsScan: sheetMode === 'scan' || sheetMode === 'apple',
+      sheetIsCreating: sheetMode === 'creating',
+      sheetIsCompact: sheetMode === 'create' || sheetMode === 'google' || sheetMode === 'signin',
+      sheetIsCreateError: sheetMode === 'create-error',
+      sheetIsScanError: sheetMode === 'scan-error',
+      sheetHasIdentity: sheetMode !== 'create-error',
+      sheetHasConfirm: sheetMode === 'create' || sheetMode === 'google' || sheetMode === 'signin' || sheetMode === 'apple',
+      sheetAnim: sheetMode === 'create-error' || sheetMode === 'scan-error'
+        ? 'shake .5s cubic-bezier(.36,.07,.19,.97) both'
+        : 'sheetUp .3s cubic-bezier(.2,.9,.3,1) both',
+      sheetTileIsPasskey: sheetMode !== 'google' && sheetMode !== 'apple',
+      sheetTileIsApple: sheetMode === 'apple',
+      scanTitle: sheetMode === 'apple' ? 'Подтвердите через Face ID' : 'Сканирование лица…',
+      scanSub: sheetMode === 'apple' ? 'чтобы войти как sasha@icloud.com' : 'Посмотрите на iPhone',
+      faceTitle: sheetMode === 'apple' ? 'Вход через Apple' : isGoogle ? 'Войти через Google' : sheetMode === 'creating' ? 'Создаём passkey' : sheetMode === 'scan' || sheetMode === 'scan-error' ? 'Войти в Link' : sheetMode === 'create' ? 'Создать passkey' : 'Войти по passkey',
+      sheetDetail: isGoogle ? 'link.app · выбор аккаунта' : sheetMode === 'apple' ? 'link.app · через Apple ID' : 'link.app · sasha@icloud.com',
+      faceCardTitle: isGoogle ? 'Александр Соколов' : sheetMode === 'apple' ? 'Подтвердите через Face ID' : 'Подтвердите через Face ID',
+      faceCardSub: isGoogle ? 'alexey.sokolov@gmail.com' : sheetMode === 'create' ? 'чтобы создать passkey для Link' : 'чтобы войти в Link',
+      pkTitle: spec.variant === 'apple' ? 'Подключите Apple ID' : spec.variant === 'google' ? 'Подключите Google' : 'Создайте passkey',
+      pkSubtitle: spec.variant === 'apple'
+        ? 'Заходите в Link через Apple ID — без пароля и SMS, с подтверждением Face ID.'
+        : spec.variant === 'google'
+          ? 'Заходите в Link через аккаунт Google — без пароля и SMS-кодов.'
+          : 'Заходите в Link без пароля — по Face ID или Touch ID. Passkey хранится на устройстве.',
+      pkCtaLabel: spec.variant === 'apple' ? 'Подключить Apple ID' : spec.variant === 'google' ? 'Подключить Google' : 'Создать passkey',
+      pkCtaBg: spec.variant === 'apple' ? '#0A0A0A' : spec.variant === 'google' ? '#fff' : '#1976FF',
+      pkCtaBorder: spec.variant === 'google' ? '1px solid #747775' : 'none',
+      pkCtaColor: spec.variant === 'google' ? '#1F1F1F' : '#fff',
+      pkCtaHasIcon: spec.variant === 'apple',
+      pkCtaHasGoogle: spec.variant === 'google',
+      pkHeroIcon: html(spec.variant === 'apple'
+        ? '<svg width="54" height="54" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M17.5 12.5c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6.7-1 1.3-2.1 1.6-3.3-1.9-.7-3-2.5-3-3.9zM15 4.8c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.3.7-3.1 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.5-.6 3.1-1.5z"/></svg>'
+        : spec.variant === 'google'
+          ? '<svg width="52" height="52" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.32z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>'
+          : '<svg width="58" height="58" viewBox="0 0 88 88" fill="none"><rect x="24" y="40" width="40" height="34" rx="9" stroke="#1976FF" stroke-width="5"/><path d="M34 40v-8a10 10 0 0120 0v8" stroke="#1976FF" stroke-width="5" stroke-linecap="round"/><circle cx="44" cy="54" r="4.5" fill="#1976FF"/><path d="M44 58.5v7" stroke="#1976FF" stroke-width="5" stroke-linecap="round"/></svg>'),
+      passkeyBenefits: (spec.variant === 'apple' ? APPLE_BENEFITS : spec.variant === 'google' ? GOOGLE_BENEFITS : BENEFITS).map((b, i, a) => ({
+        title: b[0], sub: b[1],
+        divider: i < a.length - 1 ? '0.5px solid rgba(15,39,80,.08)' : 'none',
+      })),
+      onFaceIdConfirm: live ? () => this.setState({ sheet: false, stage: 'profile', doneVia: sheetMode }) : noop,
+      onFaceIdCancel: live ? () => this.setState({ sheet: false }) : noop,
+
+      hasAvatar: avatar,
+      noAvatar: !avatar,
+      avatarLetter: (name[0] || 'А').toUpperCase(),
+      avatarBg: avatar
+        ? 'center/cover url("assets/av-' + (((spec.avatarPick !== undefined ? spec.avatarPick : (live ? st.avatarPick : 0)) || 0) + 1) + '.png")'
+        : '#F2F2F7',
+      avatarShadow: avatar ? '0 0 0 4px #fff,0 18px 36px rgba(255,107,92,.32)' : '0 0 0 1px rgba(15,39,80,.06),0 18px 36px rgba(30,125,255,.10)',
+      avatarBadgeBg: avatar ? '#fff' : grad,
+      avatarBadgeShadow: avatar ? '0 0 0 1px rgba(15,39,80,.08),0 4px 12px rgba(15,39,80,.08)' : '0 0 0 3px #fff',
+      avatarBadgeIcon: avatar
+        ? html('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>')
+        : html('<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>'),
+      onToggleAvatar: live ? () => this.setState({ avatarSheet: true }) : noop,
+      showAvatarSheet: spec.avatarSheet || (live && !!st.avatarSheet),
+      onCloseAvatars: live ? () => this.setState({ avatarSheet: false }) : noop,
+      avatarSources: [
+        ['Камера', '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="13.5" rx="3.5"/><path d="M8.5 6.5l1.6-2.5h3.8l1.6 2.5"/><circle cx="12" cy="13.2" r="3.6"/></svg>'],
+        ['Фото', '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="3.5"/><path d="M3.6 16.5l4.6-4.6 3.3 3.3 3-3 6 6"/><circle cx="8.6" cy="9.2" r="1.5"/></svg>'],
+        ['Текст', '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1976FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6.5V5h14v1.5M12 5v14M9 19h6"/></svg>'],
+      ].map(s => ({ label: s[0], icon: html(s[1]) })),
+      avatarChoices: Array.from({ length: 12 }, (_, i) => ({
+        bg: 'center/cover url("assets/av-' + (i + 1) + '.png")',
+        ring: (live ? st.avatarPick : spec.avatarPick) === i ? '0 0 0 3px #1976FF' : '0 0 0 1px rgba(15,39,80,.06)',
+        onPick: live ? () => this.setState({ avatarPick: i, avatar: true }) : noop,
+      })),
+      nameText: name || 'Как вас зовут?',
+      nameColor: name ? '#0A0A0A' : '#A6ACBA',
+      nameCtaBg: name ? grad : '#E5E5EA',
+      nameCtaShadow: name ? gradShadow : 'none',
+      nameCtaColor: name ? '#fff' : '#8E8E93',
+      nameCtaCursor: name ? 'pointer' : 'not-allowed',
+      onFinishProfile: live ? () => { if (name) this.setState({ stage: 'done' }); } : noop,
+
+      doneTitle: st.doneVia === 'create' && live ? 'Passkey создан' : 'Добро пожаловать в Link',
+      doneSubtitle: st.doneVia === 'create' && live
+        ? 'В следующий раз вход — одним Face ID, без SMS.'
+        : 'Аккаунт готов. Чаты и контакты уже подтягиваются.',
+      onReset: live ? () => this.reset() : noop,
+
+      showNumPad: !spec.noPad && stage !== 'country' &&
+        (stage === 'otp' || (stage === 'phone' && (live ? st.pad : true))) && stage !== 'method' && stage !== 'confirm',
+      onFocusPhone: live ? () => this.setState({ pad: true }) : noop,
+      isTyping: !!spec.typing,
+      notTyping: !spec.typing,
+      phoneCtaGap: spec.typing ? '10px' : '8px',
+      isCountry: stage === 'country',
+      searchRows: [
+        { pad: '0', keys: 'йцукенгшщзх'.split('').map(c => c.toUpperCase()) },
+        { pad: '0 16px', keys: 'фывапролдж'.split('').map(c => c.toUpperCase()) },
+      ],
+      searchBottom: 'ячсмитьбю'.split('').map(c => c.toUpperCase()),
+      showLetterPad: stage === 'profile',
+      quickType: (isSms && (spec.autofill || live) && stage === 'otp' && otp.length === 0 && !otpError
+        ? ['', SMS, '']
+        : ['', '', '']
+      ).map((label, i) => ({
+        label: label,
+        weight: label ? '600' : '400',
+        cursor: label ? 'pointer' : 'default',
+        divider: i > 0 ? '1px solid rgba(60,60,67,.18)' : 'none',
+        onTap: label && live ? () => { this.setState({ otp: SMS }); this.later(() => this.verify(SMS), 300); } : noop,
+      })),
+      showSmsHint: false,
+      noSmsHint: true,
+      padHint: stage === 'phone' ? 'Наберите номер — 10 цифр' : otpError ? 'Введите код заново' : 'Код из шести цифр',
+      smsCode: SMS,
+      onAutofill: live ? () => { this.setState({ otp: SMS }); this.later(() => this.verify(SMS), 300); } : noop,
+      numKeys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'del'].map(k => ({
+        d: k === 'del' || k === '' ? '' : k,
+        sub: PAD_SUB[k] || '',
+        hasSub: !!PAD_SUB[k],
+        isDel: k === 'del',
+        bg: k === '' || k === 'del' ? 'transparent' : 'rgba(255,255,255,.92)',
+        shadow: k === '' || k === 'del' ? 'none' : '0 1px 0 rgba(0,0,0,.075)',
+        onTap: !live ? noop : k === 'del' ? () => this.delDigit() : k === '' ? noop : () => this.pushDigit(k, true),
+      })),
+      letterRows: LETTERS.map((row, ri) => ({
+        pad: ri === 1 ? '0 20px' : '0',
+        keys: row.map(ch => ({
+          ch: st.shift || !st.name ? ch.toUpperCase() : ch,
+          onTap: live ? () => this.type(ch) : noop,
+        })),
+      })),
+      bottomKeys: BOTTOM.map(ch => ({
+        ch: st.shift || !st.name ? ch.toUpperCase() : ch,
+        onTap: live ? () => this.type(ch) : noop,
+      })),
+      shiftBg: st.shift ? '#fff' : 'rgba(174,179,190,.4)',
+      shiftGlyph: st.shift ? '#0A0A0A' : '#595959',
+      onShift: live ? () => this.setState(s => ({ shift: !s.shift })) : noop,
+      nameSuggestions: NAME_HINTS.map((h, i) => ({
+        label: h,
+        divider: i > 0 ? '1px solid rgba(120,120,128,.3)' : 'none',
+        onTap: live ? () => this.setState({ name: h }) : noop,
+      })),
+      onSpace: live ? () => this.setState(s => (s.name ? { name: s.name + ' ', shift: true } : {})) : noop,
+      onNameDel: live ? () => this.setState(s => ({ name: s.name.slice(0, -1) })) : noop,
+    };
+  }
+
+  reset() {
+    this.setState({ pad: false, stage: 'phone', country: 'RU', digits: '9123456789', otp: '', otpError: false, verifying: false, sending: false, timer: 32, sheet: false, name: '', avatar: false, doneVia: 'sms' });
+  }
+
+  renderVals() {
+    const st = this.state;
+    const single = st.mode === 'single';
+    const grad = '#1976FF';
+
+    return {
+      modes: [{ id: 'all', label: 'Все экраны' }, { id: 'single', label: 'Один экран · клик' }].map(m => {
+        const on = m.id === st.mode;
+        return {
+          label: m.label,
+          onPick: () => this.setState({ mode: m.id }),
+          bg: on ? '#fff' : 'transparent',
+          shadow: on ? '0 0 0 1px rgba(25,118,255,.24),0 6px 16px rgba(15,39,80,.08)' : 'none',
+          color: on ? '#0A0A0A' : '#6B6B70',
+          weight: on ? '700' : '500',
+        };
+      }),
+      isSingle: single,
+      sections: single
+        ? [{ width: 'auto', hasHeader: false, title: '', sub: '', count: '', frames: [this.frame({ stage: st.stage, label: 'Интерактивный сценарий' }, 1, true)] }]
+        : GROUPS.map(g => {
+            const items = ALL.filter(spec => groupOf(spec) === g.key);
+            return {
+              width: '100%',
+              hasHeader: true,
+              title: g.title,
+              sub: g.sub,
+              count: items.length + (items.length === 1 ? ' экран' : items.length < 5 ? ' экрана' : ' экранов'),
+              frames: items.map((spec, i) => this.frame(spec, i + 1, false)),
+            };
+          }).filter(s => s.frames.length),
+      smsCode: SMS,
+      steps: STEPS.map((s, i) => {
+        const on = s.id === st.stage;
+        return {
+          n: String(i + 1),
+          label: s.label,
+          bg: on ? '#fff' : 'transparent',
+          shadow: on ? '0 0 0 1px rgba(25,118,255,.28),0 8px 20px rgba(15,39,80,.06)' : 'none',
+          dotBg: on ? grad : 'rgba(15,39,80,.08)',
+          dotColor: on ? '#fff' : '#6B6B70',
+          color: on ? '#0A0A0A' : '#6B6B70',
+          weight: on ? '700' : '500',
+          onGo: () => this.go(s.id),
+        };
+      }),
+      onReset: () => this.reset(),
+    };
+  }
+}
+</script>
+</body>
+</html>
